@@ -15,9 +15,9 @@ import java.util.Set;
 @Entity
 @Table(name = "users")
 public class User extends BaseEntity {
-    @Column(name = "first_name",nullable = false)
+    @Column(name = "first_name")
     private String firstname;
-    @Column(name = "last_name",nullable = false)
+    @Column(name = "last_name")
     private String lastname;
     @Column(name = "email",nullable = false)
     private String email;

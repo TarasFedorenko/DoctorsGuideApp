@@ -10,17 +10,33 @@
 </head>
 <body>
 <div layout:fragment="main_content">
-  <form action="#" th:action="@{/registration}" method="post" th:object="${authForm}">
-    <div class="mb-3">
-      <label for="exampleInputEmail1" class="form-label">Email address</label>
-      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" th:field="*{email}">
+  <div class="d-flex justify-content-center registration-form">
+    <div class="p-0">
+      <div class="card">
+        <div class="card-header">
+          <h3>Registration</h3>
+        </div>
+        <div class="card-body">
+          <form action="#" th:action="@{/registration}" method="post" th:object="${authForm}">
+            <div class="form-group">
+              <label for="exampleInputEmail1">Email address</label>
+              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" th:field="*{email}">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Password</label>
+              <input type="password" class="form-control" id="exampleInputPassword1" th:field="*{password}">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+        <div class="card-footer">
+          <div class="d-flex justify-content-center links">
+            Have an account?<a th:href="@{/login}">Sign In</a>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="mb-3">
-      <label for="exampleInputPassword1" class="form-label">Password</label>
-      <input type="password" class="form-control" id="exampleInputPassword1" th:field="*{password}">
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </form>
+  </div>
 </div>
 
 </body>

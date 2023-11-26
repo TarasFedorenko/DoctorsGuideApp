@@ -1,11 +1,11 @@
 package com.geeksforless.tfedorenko.web.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@Repository
+@Controller
 @RequiredArgsConstructor
 @RequestMapping("/doctor")
 public class DoctorController {
