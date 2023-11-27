@@ -8,5 +8,6 @@ import java.util.Optional;
 public interface DiseaseService {
 
     Optional<Disease> findById(Long id);
-    List <Disease> findAll();
+
+    List<Disease> findAll();
 }
