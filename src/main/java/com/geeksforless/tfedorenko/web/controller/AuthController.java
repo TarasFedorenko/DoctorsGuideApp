@@ -59,6 +59,6 @@ public class AuthController {
         if (SecurityUtil.hasRole(RoleType.ROLE_DOCTOR.name())) {
             return "redirect:/doctor/home";
         }
-        return "/login";
+        return "redirect:/login";
     }
 }

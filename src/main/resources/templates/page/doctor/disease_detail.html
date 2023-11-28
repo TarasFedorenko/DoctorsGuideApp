@@ -1,10 +1,73 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{fragments/doctor_layout}">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Список хвороб</title>
+    <link rel="stylesheet" href="/css/list.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        .container {
+            display: flex;
+            align-items: center;
+        }
+
+        .disease-image {
+            max-width: 300px;
+            margin-right: 20px;
+        }
+
+        .disease-details {
+            flex: 1;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        p {
+            color: #555;
+        }
+
+        .symptoms {
+            margin-top: 20px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 5px;
+        }
+    </style>
 </head>
 <body>
-
+<div layout:fragment="doctor_content">
+    <div class="container">
+        <img class="disease-image" src="path/to/your/image.jpg" alt="Disease Image">
+        <div class="disease-details">
+            <h2 th:text ="${disease.getName()}" > </h2>
+            <p th:text ="${disease.getDiseaseClass()}"></p>
+            <div class="symptoms">
+                <h3>Симптомы:</h3>
+                <ul >
+                    <li th:each="symptom:${disease.getSymptoms()}">
+                        <a href="#" th:text="${symptom.getName()}"></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

@@ -10,4 +10,8 @@ public interface DiseaseService {
     Optional<Disease> findById(Long id);
 
     List<Disease> findAll();
+
+    List<Disease> getDiseasesByFirstLetter(String letter);
+
+    Optional<Disease> findByName(String name);
 }

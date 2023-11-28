@@ -8,29 +8,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Список хвороб</title>
+    <link rel = "stylesheet" href="/css/list.css">
+    <style>
+        /* Добавление стилей для улучшения внешнего вида букв */
+        a {
+            display: inline-block;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            text-decoration: none;
+            color: #333;
+            font-family: 'Arial', sans-serif;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        a:hover {
+            background-color: #ddd;
+        }
+    </style>
 </head>
 <body>
 <div layout:fragment="doctor_content">
 <div>
-    <h2>Список хвороб</h2>
-
-    <table border="1">
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>Назва хвороби</th>
-            <!-- Додайте інші необхідні стовпці для відображення інформації про хворобу -->
-        </tr>
-        </thead>
-        <tbody>
-        <!-- Використання Thymeleaf для ітерації по списку хвороб та виведення їх даних -->
-        <tr th:each="disease : ${diseases_list}">
-            <td th:text="${disease.id}"></td>
-            <td th:text="${disease.name}"></td>
-            <!-- Додайте інші необхідні стовпці для відображення інформації про хворобу -->
-        </tr>
-        </tbody>
-    </table>
+    <div class="container">
+        <h2 class="center">Выберите букву</h2>
+        <form th:action="@{/doctor/diseases/search}" method="get">
+            <label for="search">Поиск по болезни:</label>
+            <input type="text" id="search" name="name" placeholder="Введите название болезни">
+            <button type="submit">Искать</button>
+        </form>
+        <ul>
+            <li th:each="letter : ${alphabet}">
+                <a th:href="@{/doctor/diseases/letter/{letter}(letter=${letter})}" th:text="${letter}"></a>
+            </li>
+        </ul>
+    </div>
 </div>
 </div>
 </body>

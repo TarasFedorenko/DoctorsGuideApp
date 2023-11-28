@@ -24,4 +24,15 @@ public class DiseaseServiceImpl implements DiseaseService {
     public List<Disease> findAll() {
         return diseaseRepository.findAll();
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Disease> getDiseasesByFirstLetter(String letter) {
+        return diseaseRepository.findByNameStartingWithIgnoreCase(letter);
+    }
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<Disease> findByName(String name) {
+        return Optional.ofNullable(diseaseRepository.findByName(name));
+    }
 }

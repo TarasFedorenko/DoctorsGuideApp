@@ -7,10 +7,37 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link href="/css/doctor.css" rel="stylesheet">
 </head>
 <body>
 <div layout:fragment="main_content">
+        <form id="logoutForm" method="POST" th:action="@{/logout}">
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+        </form>
+        <header>
+            <h1>Логотип сайта</h1>
+            <nav>
+                <a th:href="@{/doctor/diseases}">Хвороби</a>
+                <a th:href="@{/doctor/symptoms}">Симптоми</a>
+                <a th:href="@{/doctor/procedures}">Процедури</a>
+                <a th:href="@{/doctor/drugs}">Ліки</a>
+                <a th:href="@{/doctor/appointment}">Призначення</a>
+                <span>Ім'я користувача</span>
+                <a class="nav-item nav-link" onclick="document.forms['logoutForm'].submit()" style="cursor: pointer !important;">Вихід</a>
+            </nav>
+        </header>
     <div layout:fragment="doctor_content"></div>
+    <footer>
+        <img src="logo1.png" alt="Logo 1">
+        <img src="logo2.png" alt="Logo 2">
+        <p>Контакти: Телефон, Адреса, Емейл</p>
+        <p>Запитання-Відповіді | Як дістатися</p>
+        <div class="social-icons">
+            <img src="facebook-icon.png" alt="Facebook">
+            <img src="twitter-icon.png" alt="Twitter">
+            <img src="instagram-icon.png" alt="Instagram">
+        </div>
+    </footer>
 </div>
 
 </body>
