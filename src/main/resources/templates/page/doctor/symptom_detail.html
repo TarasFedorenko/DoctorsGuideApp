@@ -1,10 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{fragments/doctor_layout}">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Список симптомів</title>
+    <link rel="stylesheet" href="/css/list.css">
 </head>
 <body>
-
+<div layout:fragment="doctor_content">
+    <div class="container">
+        <img class="disease-image" src="path/to/your/image.jpg" alt="Disease Image">
+        <div class="disease-details">
+            <h2 th:text ="${symptom.getName()}" > </h2>
+            <p th:text ="${symptom.getSymptomType()}"></p>
+            <div class="symptoms">
+                <h3>Симптомы:</h3>
+                <ul >
+                    <li th:each="disease:${symptom.getDiseases()}">
+                        <a th:href="@{/doctor/diseases/{id}(id = ${disease.getId()})}" th:text="${disease.getName()}"></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

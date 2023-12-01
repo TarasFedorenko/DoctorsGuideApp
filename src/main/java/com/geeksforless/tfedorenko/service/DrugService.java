@@ -9,4 +9,6 @@ import java.util.Optional;
 public interface DrugService {
     Optional<Drug> findById(Long id);
     List<Drug> findAll();
+    List<Drug> getDrugByFirstLetter(String letter);
+    Optional<Drug> findByName(String name);
 }

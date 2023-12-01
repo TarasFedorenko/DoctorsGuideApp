@@ -1,10 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{fragments/doctor_layout}">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Процедури</title>
 </head>
 <body>
-
+<div layout:fragment="doctor_content">
+    <div th:each=" type : ${procedureTypes}">
+        <a th:href="@{/doctor/procedures/type/{type}(type=${type})}" th:text="${type}"></a>
+    </div>
+</div>
 </body>
 </html>

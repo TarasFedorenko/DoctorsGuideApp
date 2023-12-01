@@ -6,17 +6,18 @@
       layout:decorate="~{fragments/doctor_layout}">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Симптомы</title>
+    <title>Список процедур</title>
+    <link rel="stylesheet" href="/css/list.css">
 </head>
 <body>
 <div layout:fragment="doctor_content">
-
-
-<div th:each="symptomType : ${symptomTypes}">
-    <a th:href="@{/doctor/symptoms/type/{type}(type=${symptomType})}" th:text="${symptomType}"></a>
-</div>
+    <h2>Процедури типу: <span th:text="${#strings.toUpperCase(type)}"></span></h2>
+    <ul>
+        <li th:each="procedure : ${procedures}">
+            <a th:href="@{/doctor/procedures/{id}(id=${procedure.getId()})}" th:text="${procedure.getName()}"></a>
+        </li>
+    </ul>
 </div>
 </body>
 </html>

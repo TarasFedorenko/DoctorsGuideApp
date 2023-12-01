@@ -25,4 +25,15 @@ public class DrugServiceImpl implements DrugService{
     public List<Drug> findAll() {
         return drugRepository.findAll();
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Drug> getDrugByFirstLetter(String letter) {
+        return drugRepository.findByNameStartingWithIgnoreCase(letter);
+    }
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<Drug> findByName(String name) {
+        return drugRepository.findByName(name);
+    }
 }

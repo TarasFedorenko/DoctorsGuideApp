@@ -62,7 +62,7 @@
                 <h3>Симптомы:</h3>
                 <ul >
                     <li th:each="symptom:${disease.getSymptoms()}">
-                        <a href="#" th:text="${symptom.getName()}"></a>
+                        <a th:href="@{/doctor/symptoms/{id}(id = ${symptom.getId()})}" th:text="${symptom.getName()}"></a>
                     </li>
                 </ul>
             </div>

@@ -6,17 +6,18 @@
       layout:decorate="~{fragments/doctor_layout}">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Симптомы</title>
+    <title>Список ліків</title>
+    <link rel="stylesheet" href="/css/list.css">
 </head>
 <body>
 <div layout:fragment="doctor_content">
-
-
-<div th:each="symptomType : ${symptomTypes}">
-    <a th:href="@{/doctor/symptoms/type/{type}(type=${symptomType})}" th:text="${symptomType}"></a>
-</div>
+    <h2>Лікі що починаються з <span th:text="${#strings.toUpperCase(letter)}"></span></h2>
+    <ul>
+        <li th:each="drug : ${drugs}">
+            <a th:href="@{/doctor/drugs/{id}(id=${drug.getId()})}" th:text="${drug.getName()}"></a>
+        </li>
+    </ul>
 </div>
 </body>
 </html>

@@ -1,16 +1,17 @@
 package com.geeksforless.tfedorenko.web.controller;
 
-import com.geeksforless.tfedorenko.facade.DiseaseFacade;
+import com.geeksforless.tfedorenko.facade.*;
 import com.geeksforless.tfedorenko.persistence.entity.Disease;
 import com.geeksforless.tfedorenko.web.dto.DiseaseDto;
+import com.geeksforless.tfedorenko.web.dto.DrugDto;
+import com.geeksforless.tfedorenko.web.dto.ProcedureDto;
+import com.geeksforless.tfedorenko.web.dto.SymptomDto;
 import com.geeksforless.tfedorenko.web.dto.detail.DiseaseDetailDto;
+import com.geeksforless.tfedorenko.web.dto.detail.DrugDetailDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,6 +21,10 @@ import java.util.List;
 public class DoctorController {
 
     private final DiseaseFacade diseaseFacade;
+    private final SymptomFacade symptomFacade;
+    private final ProcedureFacade  procedureFacade;
+    private final DrugFacade drugFacade;
+    private final AppointmentFacade appointmentFacade;
     private final String [] ALPHABET = {"А","Б","В","Г","Д","Е","Є","Ж","З","І","К","Л","М","Н","О","П","Р","С","Т","Ф","Х","Ц","Ч","Ш","Щ","Ю","Я"};
 
     @GetMapping("/home")
@@ -44,7 +49,7 @@ public class DoctorController {
         return "/page/doctor/disease_alphabet";
     }
     @GetMapping("/diseases/search")
-    public String getDiseaseDetails(@RequestParam String name, Model model) {
+    public String getDiseaseDetails(@RequestParam String name) {
         DiseaseDetailDto disease = diseaseFacade.findByName(name);
         if (disease == null) {
             return "redirect:/error";
@@ -52,5 +57,66 @@ public class DoctorController {
         Long diseaseId = disease.getId();
         return "redirect:/doctor/diseases/" + diseaseId;
     }
-
+    @GetMapping("/symptoms")
+    public String getSymptomsType(Model model){
+        model.addAttribute("symptomTypes",symptomFacade.findAllSymptomTypes());
+        return "/page/doctor/symptoms";
+    }
+    @GetMapping("/symptoms/type/{type}")
+    public String showSymptomsByType(@PathVariable String type, Model model) {
+        List<SymptomDto> symptomDtos = symptomFacade.findAllByType(type);
+        model.addAttribute("symptoms", symptomDtos);
+        return "/page/doctor/symptom_type";
+    }
+    @GetMapping("/symptoms/{id}")
+    public String getSymptomById(Model model, @PathVariable Long id){
+        model.addAttribute("symptom", symptomFacade.findById(id));
+        return "/page/doctor/symptom_detail";
+    }
+    @GetMapping("/procedures")
+    public String getProcedureType(Model model){
+        model.addAttribute("procedureTypes",procedureFacade.findAllProcedureTypes());
+        return "/page/doctor/procedures";
+    }
+    @GetMapping("/procedures/type/{type}")
+    public String showProceduresByType(@PathVariable String type, Model model) {
+        List<ProcedureDto> procedureDtos = procedureFacade.findAllByType(type);
+        model.addAttribute("procedures", procedureDtos);
+        return "/page/doctor/procedure_type";
+    }
+    @GetMapping("/procedures/{id}")
+    public String getProcedureById(Model model, @PathVariable Long id){
+        model.addAttribute("procedure", procedureFacade.findById(id));
+        return "/page/doctor/procedure_detail";
+    }
+    @GetMapping("/drugs")
+    public String getAllDrugs(Model model) {
+        model.addAttribute("alphabet", ALPHABET);
+        return "/page/doctor/drugs";
+    }
+    @GetMapping("/drugs/{id}")
+    public String getDrugById(Model model, @PathVariable Long id){
+        model.addAttribute("drug", drugFacade.findById(id));
+        return "/page/doctor/drug_detail";
+    }
+    @GetMapping("/drugs/letter/{letter}")
+    public String showDrugByLetter(@PathVariable String letter, Model model) {
+        List<DrugDto> drugsStartingWithLetter = drugFacade.getDrugByFirstLetter(letter);
+        model.addAttribute("drugs", drugsStartingWithLetter);
+        return "/page/doctor/drug_alphabet";
+    }
+    @GetMapping("/drugs/search")
+    public String getDrugDetails(@RequestParam String name) {
+        DrugDetailDto drug = drugFacade.findByName(name);
+        if (drug == null) {
+            return "redirect:/error";
+        }
+        Long drugId = drug.getId();
+        return "redirect:/doctor/drugs/" + drugId;
+    }
+    @PostMapping("/drugs/{id}/add")
+    public String addDrugToAppointment(@PathVariable Long id, @RequestParam Long doseId){
+        appointmentFacade.addDrugToAppointment(id, doseId);
+        return "redirect:/drugs/{id}";
+    }
 }

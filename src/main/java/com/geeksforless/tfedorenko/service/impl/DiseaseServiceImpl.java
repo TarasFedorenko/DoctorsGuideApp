@@ -33,6 +33,6 @@ public class DiseaseServiceImpl implements DiseaseService {
     @Override
     @Transactional(readOnly = true)
     public Optional<Disease> findByName(String name) {
-        return Optional.ofNullable(diseaseRepository.findByName(name));
+        return diseaseRepository.findByName(name);
     }
 }

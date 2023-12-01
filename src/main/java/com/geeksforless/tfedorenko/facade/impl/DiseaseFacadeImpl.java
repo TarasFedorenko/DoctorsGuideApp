@@ -2,6 +2,7 @@ package com.geeksforless.tfedorenko.facade.impl;
 
 import com.geeksforless.tfedorenko.facade.DiseaseFacade;
 import com.geeksforless.tfedorenko.persistence.entity.Disease;
+import com.geeksforless.tfedorenko.persistence.entity.Symptom;
 import com.geeksforless.tfedorenko.service.DiseaseService;
 import com.geeksforless.tfedorenko.web.dto.DiseaseDto;
 import com.geeksforless.tfedorenko.web.dto.detail.DiseaseDetailDto;
@@ -25,12 +26,8 @@ public class DiseaseFacadeImpl implements DiseaseFacade {
 
     @Override
     public DiseaseDetailDto findById(Long id) {
-        Optional<Disease> optionalDisease = diseaseService.findById(id);
-        if(optionalDisease.isPresent()){
-            Disease disease = optionalDisease.get();
-            return new DiseaseDetailDto(disease);
-        }
-        throw new RuntimeException("disease not found");
+        Optional<Disease> diseaseOptional = diseaseService.findById(id);
+        return diseaseOptional.map(DiseaseDetailDto::new).orElseThrow(()-> new RuntimeException("Disease not found"));
     }
 
     @Override
@@ -41,11 +38,8 @@ public class DiseaseFacadeImpl implements DiseaseFacade {
 
     @Override
     public DiseaseDetailDto findByName(String name) {
-        Optional<Disease> optionalDisease = diseaseService.findByName(name);
-        if(optionalDisease.isPresent()){
-            Disease disease = optionalDisease.get();
-            return new DiseaseDetailDto(disease);
-        }
-        throw new RuntimeException("disease not found");
+            return diseaseService.findByName(name)
+                    .map(DiseaseDetailDto::new)
+                    .orElseThrow(() -> new RuntimeException("Disease not found"));
     }
 }

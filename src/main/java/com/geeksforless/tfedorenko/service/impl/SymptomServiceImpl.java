@@ -2,6 +2,7 @@ package com.geeksforless.tfedorenko.service.impl;
 
 import com.geeksforless.tfedorenko.persistence.entity.Symptom;
 import com.geeksforless.tfedorenko.persistence.repository.SymptomRepository;
+import com.geeksforless.tfedorenko.persistence.type.SymptomType;
 import com.geeksforless.tfedorenko.service.SymptomService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -24,5 +25,17 @@ public class SymptomServiceImpl implements SymptomService {
     @Transactional(readOnly = true)
     public List<Symptom> findAll() {
         return symptomRepository.findAll();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Symptom> findAllByType(SymptomType symptomType) {
+        return symptomRepository.findAllByType(symptomType);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<SymptomType> findAllSymptomTypes() {
+        return symptomRepository.findAllUniqueSymptomTypes();
     }
 }
