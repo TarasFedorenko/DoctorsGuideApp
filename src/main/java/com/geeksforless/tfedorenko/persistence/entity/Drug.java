@@ -15,11 +15,15 @@ import java.util.Set;
 public class Drug extends BaseEntity {
     @Column(name = "name", nullable = false)
     private String name;
-    @Column(name = "description", nullable = false, columnDefinition = "TEXT")
+    @Column(name = "description",  columnDefinition = "TEXT")
     private String description;
-    @Column(name = "article", nullable = false)
+    @Column(name = "article")
     private String article;
-    @Column(name = "drug_group", nullable = false)
+    @Column(name = "dose_value", precision = 10, scale = 2)
+    private double doseValue;
+    @Column(name = "dose_unit")
+    private String doseUnit;
+    @Column(name = "drug_group")
     @Enumerated(EnumType.STRING)
     private DrugGroup drugGroup;
     @Column(name = "quantity", nullable = false)
@@ -29,21 +33,18 @@ public class Drug extends BaseEntity {
             joinColumns = @JoinColumn(name = "drug_id"),
             inverseJoinColumns = @JoinColumn(name = "analog_id"))
     private Set<Drug> analogs;
-    @OneToMany(mappedBy = "drug")
-    private Set<Dose> doses;
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "disease_drug",
             joinColumns = @JoinColumn(name = "disease_id"),
             inverseJoinColumns = @JoinColumn(name = "drug_id"))
     private Set<Disease> diseases;
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "drugs")
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "drugs", cascade = CascadeType.ALL)
     private Set<Appointment>appointments;
 
 
     public Drug(){
         super();
         this.analogs = new HashSet<>();
-        this.doses = new HashSet<>();
         this.diseases = new HashSet<>();
         this.quantity = 0;
     }

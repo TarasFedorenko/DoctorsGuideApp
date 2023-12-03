@@ -1,10 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      layout:decorate="~{fragments/doctor_layout}">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Призначення</title>
+    <link rel="stylesheet" href="/css/list.css">
 </head>
 <body>
+<div layout:fragment="doctor_content">
+    <div class="container">
+        <h2>New Appointment</h2>
 
+        <form th:action="@{/doctor/appointment/save}" method="post" th:object="${newAppointment}">
+            <label>First Name: <input type="text" th:field="*{firstName}"/></label>
+            <label>Last Name: <input type="text" th:field="*{lastName}"/></label>
+            <label>Date of Birth: <input type="date" th:field="*{birthDate}"/></label>
+            <h3>Drug List</h3>
+            <ul>
+                <li th:each="drug : ${temporaryDrugs}">
+                    <p th:text="${drug.name}"></p>
+                    <label>Quantity: <input type="number" th:field="*{drugQuantities[__${drug.id}__]}" min="1" value="1"/></label>
+                </li>
+            </ul>
+
+            <button type="submit">Assign Appointment</button>
+        </form>
+    </div>
+</div>
 </body>
 </html>

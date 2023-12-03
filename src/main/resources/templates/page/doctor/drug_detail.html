@@ -15,26 +15,23 @@
     <div class="container">
         <img class="disease-image" src="path/to/your/image.jpg" alt="Disease Image">
         <div class="disease-details">
-            <h2 th:text="${drug.getName()}"></h2>
-            <p th:text="${drug.getDescription()}"></p>
-            <p th:text="${drug.getAnalogs()}"></p>
-            <p th:text="${drug.getArticle()}"></p>
-            <p th:text="${drug.getDrugGroup()}"></p>
+            <h2 th:text="${drug.name}"></h2>
+            <p th:text="${drug.description}"></p>
+            <p th:text="${drug.article}"></p>
+            <p th:text="${drug.drugGroup}"></p>
+            <p th:text="${drug.doseValue +' '+ drug.doseUnit}"></p>
             <div class="symptoms">
                 <h3>Лікі:</h3>
                 <ul>
                     <li th:each="disease : ${drug.getDiseases()}">
-                        <a th:href="@{/doctor/diseases/{id}(id = ${disease.getId()})}" th:text="${disease.getName()}"></a>
-                    </li>
-                    <li th:each="dose : ${drug.getDoses()}">
-                        <div>
-                            <span th:text="${dose.value + ' ' + dose.getUnit()}"></span>
-                            <form th:action="@{/doctor/drugs/{id}/add(id=${drug.getId()})}" method="post">
-                                <button type="submit" th:href="@{/doctor/drugs/{id}(id=${drug.getId()})}">ПРИЗНАЧИТИ</button>
-                            </form>
-                        </div>
+                        <a th:href="@{/doctor/diseases/{id}(id = ${disease.getId()})}"
+                           th:text="${disease.getName()}"></a>
                     </li>
                 </ul>
+                <h3>DOSES : </h3>
+                <form  th:action="@{/doctor/drugs/{id}/add(id=${drug.id})}" method="post">
+                    <button type="submit">Assign</button>
+                </form>
             </div>
         </div>
     </div>

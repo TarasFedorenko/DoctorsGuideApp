@@ -1,11 +1,9 @@
 package com.geeksforless.tfedorenko.web.dto.detail;
 
 import com.geeksforless.tfedorenko.persistence.entity.Disease;
-import com.geeksforless.tfedorenko.persistence.entity.Dose;
 import com.geeksforless.tfedorenko.persistence.entity.Drug;
 import com.geeksforless.tfedorenko.persistence.type.DrugGroup;
 import com.geeksforless.tfedorenko.web.dto.DiseaseDto;
-import com.geeksforless.tfedorenko.web.dto.DoseDto;
 import com.geeksforless.tfedorenko.web.dto.DrugDto;
 import lombok.Getter;
 import lombok.Setter;
@@ -24,9 +22,11 @@ public class DrugDetailDto {
     private String article;
     private DrugGroup drugGroup;
     private Integer quantity;
+    private double doseValue;
+    private String doseUnit;
     Set<DrugDto> analogs;
     Set<DiseaseDto> diseases;
-    Set<DoseDto> doses;
+
 
     public DrugDetailDto(Drug drug){
         this.id =drug.getId();
@@ -35,9 +35,10 @@ public class DrugDetailDto {
         this.article = drug.getArticle();
         this.drugGroup =drug.getDrugGroup();
         this.quantity = drug.getQuantity();
+        this.doseValue = drug.getDoseValue();
+        this.doseUnit = drug.getDoseUnit();
         initAnalogs(drug);
         initDiseases(drug);
-        initDoses(drug);
     }
 
     private void initAnalogs(Drug drug) {
@@ -54,11 +55,5 @@ public class DrugDetailDto {
         }
     }
 
-    private void initDoses(Drug drug) {
-        Set<Dose> doseSet = drug.getDoses();
-        if(CollectionUtils.isNotEmpty(doseSet)){
-            this.doses = doseSet.stream().map(DoseDto::new).collect(Collectors.toSet());
-        }
-    }
 
 }

@@ -1,7 +1,6 @@
 package com.geeksforless.tfedorenko.service.impl;
 
 import com.geeksforless.tfedorenko.persistence.entity.Procedure;
-import com.geeksforless.tfedorenko.persistence.repository.DoseRepository;
 import com.geeksforless.tfedorenko.persistence.repository.ProcedureRepository;
 import com.geeksforless.tfedorenko.persistence.type.ProcedureType;
 import com.geeksforless.tfedorenko.service.ProcedureService;

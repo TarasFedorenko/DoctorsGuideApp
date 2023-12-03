@@ -3,6 +3,7 @@ package com.geeksforless.tfedorenko.persistence.entity.user;
 import com.geeksforless.tfedorenko.persistence.type.DepartmentType;
 import com.geeksforless.tfedorenko.persistence.type.Gender;
 import com.geeksforless.tfedorenko.persistence.type.RoleType;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,6 +12,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Entity
+@AllArgsConstructor
 @DiscriminatorValue("DOCTOR")
 public class Doctor extends User{
     @Column(name = "age")
@@ -26,6 +28,4 @@ public class Doctor extends User{
         super();
         setRoleType(RoleType.ROLE_DOCTOR);
     }
-
-
 }

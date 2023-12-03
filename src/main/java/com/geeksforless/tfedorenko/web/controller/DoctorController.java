@@ -1,7 +1,11 @@
 package com.geeksforless.tfedorenko.web.controller;
 
 import com.geeksforless.tfedorenko.facade.*;
+import com.geeksforless.tfedorenko.persistence.entity.Appointment;
 import com.geeksforless.tfedorenko.persistence.entity.Disease;
+import com.geeksforless.tfedorenko.persistence.entity.user.Doctor;
+import com.geeksforless.tfedorenko.service.DoctorService;
+import com.geeksforless.tfedorenko.util.SecurityUtil;
 import com.geeksforless.tfedorenko.web.dto.DiseaseDto;
 import com.geeksforless.tfedorenko.web.dto.DrugDto;
 import com.geeksforless.tfedorenko.web.dto.ProcedureDto;
@@ -25,6 +29,7 @@ public class DoctorController {
     private final ProcedureFacade  procedureFacade;
     private final DrugFacade drugFacade;
     private final AppointmentFacade appointmentFacade;
+    private final DoctorService doctorService;
     private final String [] ALPHABET = {"А","Б","В","Г","Д","Е","Є","Ж","З","І","К","Л","М","Н","О","П","Р","С","Т","Ф","Х","Ц","Ч","Ш","Щ","Ю","Я"};
 
     @GetMapping("/home")
@@ -115,8 +120,20 @@ public class DoctorController {
         return "redirect:/doctor/drugs/" + drugId;
     }
     @PostMapping("/drugs/{id}/add")
-    public String addDrugToAppointment(@PathVariable Long id, @RequestParam Long doseId){
-        appointmentFacade.addDrugToAppointment(id, doseId);
-        return "redirect:/drugs/{id}";
+    public String addDrugToAppointment(@PathVariable Long id){
+        appointmentFacade.addDrugToAppointment(id);
+        return "redirect:/doctor/drugs/{id}";
+    }
+    @GetMapping("/appointment")
+    public String showAppointmentPage(Model model) {
+        model.addAttribute("newAppointment", new Appointment());
+        model.addAttribute("temporaryDrugs", appointmentFacade.getTemporaryDrugs());
+        return "/page/doctor/appointment";
+    }
+
+    @PostMapping("/appointment/save")
+    public String saveAppointment(@ModelAttribute("newAppointment") Appointment newAppointment) {
+        appointmentFacade.saveAppointment(newAppointment);
+        return "redirect:/doctor/appointment";
     }
 }

@@ -5,8 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.Set;
+import java.util.*;
 
 @Getter
 @Setter
@@ -23,14 +22,21 @@ public class Appointment extends BaseEntity{
     @Column(name = "birth_date")
     private Date birthDate;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @Transient
+    private Map<Long, Integer> drugQuantities;
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "drugs_appointment",
             joinColumns = @JoinColumn(name = "drug_id"),
             inverseJoinColumns = @JoinColumn(name = "appointment_id") )
     private Set<Drug> drugs;
-    @ManyToOne()
+
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
-
+    public Appointment(){
+        this.drugs=new HashSet<>();
+        this.drugQuantities =new HashMap<>();
+    }
 }
