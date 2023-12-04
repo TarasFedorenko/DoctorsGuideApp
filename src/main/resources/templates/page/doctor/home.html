@@ -11,20 +11,47 @@
 </head>
 <body>
 <div layout:fragment="doctor_content">
-    <div class="clinic-card">
-        <h2>Заголовок клініки</h2>
-        <p>Опис клініки...</p>
-    </div>
-
-    <div class="carousel">
-        <img src="image1.jpg" alt="Image 1">
-        <img src="image2.jpg" alt="Image 2">
-        <img src="image3.jpg" alt="Image 3">
-    </div>
-
-    <div class="clinic-card">
-        <img src="clinic-image.jpg" alt="Clinic Image" style="float: left; margin-right: 20px;">
-        <p>Опис клініки...</p>
+    <div class="col-md-9 col-sm-12 col-xs-12 ">
+        <div class="form-style-1 user-pro" action="#">
+            <form th:action="@{/doctor/update/{id}(id=${doctor.getId()})}" th:object="${doctor}" method="post" class="user">
+                <h4>Subscriber info</h4>
+                <div class="row">
+                    <div class="col-md-6 form-it">
+                        <label>Username</label>
+                        <input type="text" th:field="*{first_name}" placeholder="">
+                    </div>
+                    <div class="col-md-6 form-it">
+                        <label>Email Address</label>
+                        <input type="text" th:field="*{last_name}" placeholder="">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 form-it">
+                        <label>Phone number</label>
+                        <input type="text" th:field="*{email}" placeholder="  ">
+                    </div>
+                    <div class="col-md-6 form-it">
+                        <label>Age</label>
+                        <input type="text" th:field="*{age}" placeholder=" ">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 form-it">
+                        <label>Country</label>
+                        <input type="text" th:field="*{gender}" placeholder=" ">
+                    </div>
+                    <div class="col-md-6 form-it">
+                        <label>Gender</label>
+                        <input type="text" th:field="*{department}" placeholder=" ">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <input class="submit" type="submit" value="save">
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 </body>

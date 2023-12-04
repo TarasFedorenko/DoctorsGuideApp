@@ -1,11 +1,13 @@
 package com.geeksforless.tfedorenko.persistence.entity;
 
 import com.geeksforless.tfedorenko.persistence.type.DrugGroup;
+import groovy.transform.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Getter
@@ -26,6 +28,9 @@ public class Drug extends BaseEntity {
     @Column(name = "drug_group")
     @Enumerated(EnumType.STRING)
     private DrugGroup drugGroup;
+
+
+
     @Column(name = "quantity", nullable = false)
     private Integer quantity;
     @ManyToMany(fetch = FetchType.LAZY)
@@ -47,5 +52,17 @@ public class Drug extends BaseEntity {
         this.analogs = new HashSet<>();
         this.diseases = new HashSet<>();
         this.quantity = 0;
+    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Drug drug = (Drug) o;
+        return Objects.equals(getId(), drug.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
     }
 }

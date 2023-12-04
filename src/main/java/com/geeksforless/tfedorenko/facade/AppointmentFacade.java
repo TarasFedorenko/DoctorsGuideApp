@@ -13,4 +13,6 @@ public interface AppointmentFacade {
     Set<Drug> getTemporaryDrugs();
 
     void saveAppointment(Appointment newAppointment);
+
+    void removeDrugFromAppointment(Long drugId);
 }

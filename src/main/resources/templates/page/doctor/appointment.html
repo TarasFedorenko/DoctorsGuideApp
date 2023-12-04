@@ -25,9 +25,9 @@
                 <li th:each="drug : ${temporaryDrugs}">
                     <p th:text="${drug.name}"></p>
                     <label>Quantity: <input type="number" th:field="*{drugQuantities[__${drug.id}__]}" min="1" value="1"/></label>
+                    <a th:href="@{/doctor/appointment/removeDrug(drugId=${drug.id})}" class="remove-icon">X</a>
                 </li>
             </ul>
-
             <button type="submit">Assign Appointment</button>
         </form>
     </div>

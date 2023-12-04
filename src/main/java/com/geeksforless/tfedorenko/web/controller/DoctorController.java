@@ -13,6 +13,8 @@ import com.geeksforless.tfedorenko.web.dto.SymptomDto;
 import com.geeksforless.tfedorenko.web.dto.detail.DiseaseDetailDto;
 import com.geeksforless.tfedorenko.web.dto.detail.DrugDetailDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -135,5 +137,29 @@ public class DoctorController {
     public String saveAppointment(@ModelAttribute("newAppointment") Appointment newAppointment) {
         appointmentFacade.saveAppointment(newAppointment);
         return "redirect:/doctor/appointment";
+    }
+    @GetMapping("/appointment/removeDrug")
+    public String removeDrugFromAppointment(@RequestParam Long drugId) {
+        appointmentFacade.removeDrugFromAppointment(drugId);
+        return "redirect:/doctor/appointment";
+    }
+
+    @GetMapping("/home")
+    public String home(Model model) {
+        model.addAttribute("doctor", getDoctor());
+        return "page/doctor/home";
+    }
+
+    @PostMapping("/update/{id}")
+    public String updateUserInfo(@ModelAttribute("doctor") DoctorDto updatedDoctor, @PathVariable Long id) {
+        updatedDoctor.setId(id);
+        doctorFacade.update(updatedDoctor);
+        return "redirect:/doctor/home";
+    }
+
+    private DoctorDto getDoctor() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String email = authentication.getName();
+        return doctorFacade.findByEmail(email);
     }
 }

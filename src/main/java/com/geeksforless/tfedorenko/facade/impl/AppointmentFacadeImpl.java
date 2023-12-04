@@ -47,7 +47,11 @@ public class AppointmentFacadeImpl implements AppointmentFacade {
         Optional<Drug> optionalDrug = drugService.findById(id);
         if (optionalDrug.isPresent()) {
             Drug drugToAdd = optionalDrug.get();
-            temporaryDrugs.add(drugToAdd);
+            if (!temporaryDrugs.contains(drugToAdd)) {
+                temporaryDrugs.add(drugToAdd);
+            } else {
+                throw new RuntimeException("Drug is already in the list");
+            }
         } else {
             throw new RuntimeException("Drug not found");
         }
@@ -58,7 +62,7 @@ public class AppointmentFacadeImpl implements AppointmentFacade {
         List<Long> drugIds = convertSetToDrugIds(temporaryDrugs);
         List<Drug> drugs = drugService.findAllByIds(drugIds);
 
-        // Проверка наличия достаточного количества для каждого препарата
+
         Map<Long, Integer> drugQuantities = newAppointment.getDrugQuantities();
         for (Drug drug : drugs) {
             int orderedQuantity = drugQuantities.getOrDefault(drug.getId(), 0);
@@ -82,6 +86,11 @@ public class AppointmentFacadeImpl implements AppointmentFacade {
         appointmentService.saveAppointment(newAppointment);
         saveAppointmentToFile(newAppointment);
         clearTemporaryList();
+    }
+
+    @Override
+    public void removeDrugFromAppointment(Long drugId) {
+        temporaryDrugs.removeIf(drug -> Objects.equals(drug.getId(), drugId));
     }
 
     @Override
