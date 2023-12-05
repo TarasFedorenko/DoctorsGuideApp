@@ -16,14 +16,15 @@
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         </form>
         <header>
-            <h1>Логотип сайта</h1>
+            <h1>Приватна клініка</h1>
             <nav>
                 <a th:href="@{/doctor/diseases}">Хвороби</a>
                 <a th:href="@{/doctor/symptoms}">Симптоми</a>
                 <a th:href="@{/doctor/procedures}">Процедури</a>
                 <a th:href="@{/doctor/drugs}">Ліки</a>
                 <a th:href="@{/doctor/appointment}">Призначення</a>
-                <span sec:authentication="name"></span>
+                <a th:href="@{/doctor/home}"><i class="fa fa-envelope" aria-hidden="true"
+                                               sec:authentication="name"> </i></a>
                 <a class="nav-item nav-link" onclick="document.forms['logoutForm'].submit()" style="cursor: pointer !important;">Вихід</a>
             </nav>
         </header>

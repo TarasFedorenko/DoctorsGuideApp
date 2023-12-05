@@ -7,7 +7,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -28,12 +30,12 @@ public class User extends BaseEntity {
     @Column(name = "enable",nullable = false)
     private Boolean enable;
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    private Set<Appointment> appointments;
+    private List<Appointment> appointments;
 
     public User (){
         super();
         this.enable =true;
-        this.appointments=new HashSet<>();
+        this.appointments=new ArrayList<>();
     }
 
 }

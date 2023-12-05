@@ -22,4 +22,9 @@ public class DoctorServiceImpl implements DoctorService {
         }
         throw new RuntimeException("doctor not found");
     }
+
+    @Override
+    public void updateDoctor(Doctor doctor) {
+        doctorRepository.save(doctor);
+    }
 }

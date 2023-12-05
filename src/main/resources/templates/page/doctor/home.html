@@ -11,47 +11,68 @@
 </head>
 <body>
 <div layout:fragment="doctor_content">
-    <div class="col-md-9 col-sm-12 col-xs-12 ">
-        <div class="form-style-1 user-pro" action="#">
-            <form th:action="@{/doctor/update/{id}(id=${doctor.getId()})}" th:object="${doctor}" method="post" class="user">
-                <h4>Subscriber info</h4>
-                <div class="row">
-                    <div class="col-md-6 form-it">
-                        <label>Username</label>
-                        <input type="text" th:field="*{first_name}" placeholder="">
-                    </div>
-                    <div class="col-md-6 form-it">
-                        <label>Email Address</label>
-                        <input type="text" th:field="*{last_name}" placeholder="">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6 form-it">
-                        <label>Phone number</label>
-                        <input type="text" th:field="*{email}" placeholder="  ">
-                    </div>
-                    <div class="col-md-6 form-it">
-                        <label>Age</label>
-                        <input type="text" th:field="*{age}" placeholder=" ">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6 form-it">
-                        <label>Country</label>
-                        <input type="text" th:field="*{gender}" placeholder=" ">
-                    </div>
-                    <div class="col-md-6 form-it">
-                        <label>Gender</label>
-                        <input type="text" th:field="*{department}" placeholder=" ">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-2">
-                        <input class="submit" type="submit" value="save">
-                    </div>
-                </div>
-            </form>
-        </div>
+    <div>
+        <h2>Welcome, Doctor!</h2>
+        <form action="/doctor/home" method="post" th:object="${doctor}">
+
+            <label for="first_name">First name:</label>
+            <input type="text" id="first_name" name="first_name" th:field="*{firstname}">
+
+            <label for="last_name">Last name:</label>
+            <input type="text" id="last_name" name="last_name" th:field="*{lastname}">
+
+            <label for="email">E-mail:</label>
+            <input type="text" id="email" name="email" th:field="*{email}">
+
+            <label for="new_password">New Password:</label>
+            <input type="password" id="new_password" name="new_password">
+
+            <label for="age">Age:</label>
+            <input type="text" id="age" name="age" th:field="*{age}">
+
+            <label for="gender">Gender:</label>
+            <select id="gender" name="gender" th:field="*{gender}">
+                <option value="MALE">Male</option>
+                <option value="FEMALE">Female</option>
+            </select>
+
+            <label for="department">Department:</label>
+            <select id="department" name="department" th:field="*{department}">
+                <option value="THERAPEUTIC">THERAPEUTIC</option>
+                <option value="SURGICAL">SURGICAL</option>
+                <option value="CARDIOLOGICAL">CARDIOLOGICAL</option>
+                <option value="PEDIATRIC">PEDIATRIC</option>
+                <option value="PSYCHIATRIC">PSYCHIATRIC</option>
+            </select>
+
+            <button type="submit">Save Changes</button>
+        </form>
+        <table border="1">
+            <thead>
+            <tr>
+                <th>№ призначення</th>
+                <th>Дата призначення</th>
+                <th>Ім'я пацієнта</th>
+                <th>Прізвище пацієнта</th>
+                <th>Дата народження</th>
+                <th>Призначені ліки</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- Loop through your appointment data here -->
+            <tr th:each="appointment : ${appointments}">
+                <td th:text="${appointment.id}"></td>
+                <td th:text="${#dates.format(appointment.created, 'dd-MM-yyyy')}"></td>
+                <td th:text="${appointment.firstName}"></td>
+                <td th:text="${appointment.lastName}"></td>
+                <td th:text="${#dates.format(appointment.birthDate, 'dd-MM-yyyy')}"></td>
+                <td>
+                    <!-- Loop through drugs in the appointment -->
+                    <span th:each="drug : ${appointment.drugs}" th:text="${drug.name + ' '}"></span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 </div>
 </body>
