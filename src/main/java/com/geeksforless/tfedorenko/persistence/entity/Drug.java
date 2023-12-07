@@ -28,10 +28,7 @@ public class Drug extends BaseEntity {
     @Column(name = "drug_group")
     @Enumerated(EnumType.STRING)
     private DrugGroup drugGroup;
-
-
-
-    @Column(name = "quantity", nullable = false)
+    @Column(name = "quantity")
     private Integer quantity;
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "analog_drug",

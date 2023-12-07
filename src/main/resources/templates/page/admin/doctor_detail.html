@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      layout:decorate="~{fragments/admin_layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Doctor Details</title>
+</head>
+<body>
+<div layout:fragment="admin_content">
+
+    <!-- Отобразите все поля из DoctorDetailDto -->
+
+    <h2>Doctor Details</h2>
+    <p th:text="'ID: ' + ${doctor.id}"></p>
+    <p th:text="'Created: ' + ${doctor.created}"></p>
+    <p th:text="'Active: ' + ${doctor.isActive}"></p>
+    <p th:text="'Email: ' + ${doctor.email}"></p>
+    <p th:text="'First Name: ' + ${doctor.firstName}"></p>
+    <p th:text="'Last Name: ' + ${doctor.lastName}"></p>
+    <p th:text="'Age: ' + ${doctor.age}"></p>
+    <p th:text="'Gender: ' + ${doctor.gender}"></p>
+    <p th:text="'Department: ' + ${doctor.departmentType}"></p>
+
+    <!-- Отобразите список приемов (appointments) -->
+
+    <h3>Appointments</h3>
+    <table border="1">
+        <thead>
+        <tr>
+            <th>Appointment ID</th>
+            <th>Date</th>
+            <!-- Добавьте другие заголовки, если необходимо -->
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="appointment : ${doctor.appointments}">
+            <td th:text="${appointment.id}"></td>
+            <td th:text="${appointment.created}"></td>
+            <td th:text="${appointment.firstName + ' ' + appointment.lastName}"></td>
+            <td th:text="${appointment.birthDate}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+</body>
+</html>

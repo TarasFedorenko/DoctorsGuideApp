@@ -44,4 +44,9 @@ public class DrugFacadeImpl implements DrugFacade {
         Optional<Drug> drugOptional = drugService.findById(id);
         return drugOptional.map(DrugDetailDto::new).orElseThrow(()-> new RuntimeException("Drug not found"));
     }
+
+    @Override
+    public void createDrug(Drug drug) {
+        drugService.createDrug(drug);
+    }
 }

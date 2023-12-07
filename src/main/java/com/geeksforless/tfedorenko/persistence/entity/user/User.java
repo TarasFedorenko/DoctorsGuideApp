@@ -29,7 +29,7 @@ public class User extends BaseEntity {
     private RoleType roleType;
     @Column(name = "enable",nullable = false)
     private Boolean enable;
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Appointment> appointments;
 
     public User (){

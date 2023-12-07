@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      layout:decorate="~{fragments/admin_layout}">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div layout:fragment="admin_content">
+  <a th:href="@{/admin/doctors/create}">
+    <button>Створити користувача</button>
+  </a>
+
+  <table border="1">
+    <thead>
+    <tr>
+      <th>№</th>
+      <th>Дата створення</th>
+      <th>Ім'я та прізвище</th>
+      <th>Електронна пошта</th>
+      <th>Дії</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${users}">
+      <td th:text="${user.id}"></td>
+      <td th:text="${user.created}"></td>
+      <td th:text="${user.firstName + ' ' + user.lastName}"></td>
+      <td th:text="${user.email}"></td>
+      <td>
+        <a th:href="@{/admin/doctors/details/{id}(id=${user.id})}">
+          <button>Деталі</button>
+        </a>
+      </td>
+      <td>
+        <form th:if="${not user.active}" th:action="@{/admin/doctors/activate/{id}(id=${user.id})}"  method="post">
+          <button type="submit" th:href="@{/admin/doctors/list}">Activate</button>
+        </form>
+      </td>
+      <td>
+        <form th:if="${user.active}" th:action="@{/admin/doctors/deactivate/{id}(id=${user.id})}"  method="post">
+          <button type="submit" th:href="@{/admin/doctors/list}">Deactivate</button>
+        </form>
+      </td>
+      <td>
+        <a th:href="@{/admin/doctors/delete/{id}(id=${user.id})}">
+          <button>Видалити</button>
+        </a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>

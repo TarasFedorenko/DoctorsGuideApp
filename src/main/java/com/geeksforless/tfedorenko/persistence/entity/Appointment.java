@@ -25,13 +25,13 @@ public class Appointment extends BaseEntity{
     @Transient
     private Map<Long, Integer> drugQuantities;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "drugs_appointment",
             joinColumns = @JoinColumn(name = "drug_id"),
             inverseJoinColumns = @JoinColumn(name = "appointment_id") )
     private Set<Drug> drugs;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 

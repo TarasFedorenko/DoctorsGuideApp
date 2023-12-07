@@ -1,9 +1,10 @@
-package com.geeksforless.tfedorenko.web.dto;
+package com.geeksforless.tfedorenko.web.dto.detail;
 
 import com.geeksforless.tfedorenko.persistence.entity.Appointment;
 import com.geeksforless.tfedorenko.persistence.entity.user.Doctor;
 import com.geeksforless.tfedorenko.persistence.type.DepartmentType;
 import com.geeksforless.tfedorenko.persistence.type.Gender;
+import com.geeksforless.tfedorenko.web.dto.AppointmentDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,14 +12,12 @@ import org.apache.commons.collections4.CollectionUtils;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Getter
 @Setter
 @NoArgsConstructor
-public class DoctorDto {
-
+public class DoctorDetailDto {
     private Long id;
     private Date created;
     private boolean isActive;
@@ -30,7 +29,7 @@ public class DoctorDto {
     private DepartmentType departmentType;
     private List<AppointmentDto> appointments;
 
-    public DoctorDto(Doctor doctor){
+    public DoctorDetailDto(Doctor doctor){
         this.id=doctor.getId();
         this.created = doctor.getCreated();
         this.isActive = doctor.getEnable();
@@ -49,5 +48,4 @@ public class DoctorDto {
             this.appointments= doctorSet.stream().map(AppointmentDto::new).collect(Collectors.toList());
         }
     }
-
 }

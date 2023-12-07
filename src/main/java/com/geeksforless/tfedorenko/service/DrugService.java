@@ -14,4 +14,5 @@ public interface DrugService {
     Optional<Drug> findByName(String name);
     List<Drug> findAllByIds(List<Long>drugs);
     void saveDrug(Drug drug);
+    void createDrug(Drug drug);
 }
