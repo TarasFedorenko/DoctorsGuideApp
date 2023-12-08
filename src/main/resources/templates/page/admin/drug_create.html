@@ -84,9 +84,9 @@
                 </ul>
                 <h4>Drug List</h4>
                 <ul>
-                    <li th:each="disease : ${temporaryDisease}">
+                    <li th:each="disease : ${temporaryDiseases}">
                         <p th:text="${disease.name}"></p>
-                        <a th:href="@{/admin/drugs/removeDrug(diseaseId=${disease.id})}" class="remove-icon">X</a>
+                        <a th:href="@{/admin/drugs/removeDisease(diseaseId=${disease.id})}" class="remove-icon">X</a>
                     </li>
                 </ul>
             </div>

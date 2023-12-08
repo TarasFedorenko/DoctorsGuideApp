@@ -2,16 +2,15 @@ package com.geeksforless.tfedorenko.facade.impl;
 
 import com.geeksforless.tfedorenko.facade.DrugFacade;
 import com.geeksforless.tfedorenko.persistence.entity.Drug;
+import com.geeksforless.tfedorenko.persistence.entity.Disease;
+import com.geeksforless.tfedorenko.service.DiseaseService;
 import com.geeksforless.tfedorenko.service.DrugService;
 import com.geeksforless.tfedorenko.web.dto.DrugDto;
 import com.geeksforless.tfedorenko.web.dto.detail.DrugDetailDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -19,7 +18,11 @@ import java.util.stream.Collectors;
 public class DrugFacadeImpl implements DrugFacade {
 
     private final DrugService drugService;
+
+    private final DiseaseService diseaseService;
     private final Set<Drug> temporaryDrugs = new HashSet<>();
+
+    private final Set<Disease> temporaryDiseases = new HashSet<>();
     @Override
     public List<DrugDto> getDrugByFirstLetter(String letter) {
         List<Drug> drugList = drugService.getDrugByFirstLetter(letter);
@@ -47,13 +50,18 @@ public class DrugFacadeImpl implements DrugFacade {
 
     @Override
     public void createDrug(Drug newDrug) {
-        List<Long> drugIds = convertSetToDrugIds(temporaryDrugs);
+        List<Long> drugIds = convertSetToDrugIds();
         List<Drug> analogs = drugService.findAllByIds(drugIds);
 
+        List<Long> diseaseIds = convertSetToDiseaseIds();
+        List<Disease> diseases = diseaseService.findAllByIds(diseaseIds);
+
+        newDrug.getDiseases().addAll(diseases);
         newDrug.getAnalogs().addAll(analogs);
 
         drugService.saveDrug(newDrug);
-        clearTemporaryList();
+        clearTemporaryDiseaseList();
+        clearTemporaryDrugList();
     }
 
     @Override
@@ -70,18 +78,56 @@ public class DrugFacadeImpl implements DrugFacade {
             throw new RuntimeException("Drug not found");
         }
     }
-    private List<Long> convertSetToDrugIds(Set<Drug> temporaryDrugs) {
+    private List<Long> convertSetToDrugIds() {
         return temporaryDrugs.stream()
                 .map(Drug::getId)
+                .collect(Collectors.toList());
+    }
+    private List<Long> convertSetToDiseaseIds() {
+        return temporaryDiseases.stream()
+                .map(Disease::getId)
                 .collect(Collectors.toList());
     }
     @Override
     public Set<Drug> getTemporaryDrugs() {
         return temporaryDrugs;
     }
-
-    private void clearTemporaryList() {
+    @Override
+    public Set<Disease> getTemporaryDiseases() {
+        return temporaryDiseases;
+    }
+    private void clearTemporaryDrugList() {
         temporaryDrugs.clear();
     }
+
+    private void clearTemporaryDiseaseList() {
+        temporaryDiseases.clear();
+    }
+    @Override
+    public void removeAnalogFromNewDrug(Long drugId) {
+        temporaryDrugs.removeIf(drug -> Objects.equals(drug.getId(), drugId));
+    }
+
+    @Override
+    public void addDiseaseToTempList(Long diseaseId) {
+        Optional<Disease> optionalDisease = diseaseService.findById(diseaseId);
+        if (optionalDisease.isPresent()) {
+            Disease diseaseToAdd = optionalDisease.get();
+            if (!temporaryDiseases.contains(diseaseToAdd)) {
+                temporaryDiseases.add(diseaseToAdd);
+            } else {
+                throw new RuntimeException("Disease is already in the list");
+            }
+        } else {
+            throw new RuntimeException("Disease not found");
+        }
+    }
+
+    @Override
+    public void removeDiseaseFromNewDrug(Long diseaseId) {
+        temporaryDiseases.removeIf(disease ->Objects.equals(disease.getId(), diseaseId));
+    }
+
+
 
 }

@@ -2,7 +2,6 @@ package com.geeksforless.tfedorenko.facade.impl;
 
 import com.geeksforless.tfedorenko.facade.DiseaseFacade;
 import com.geeksforless.tfedorenko.persistence.entity.Disease;
-import com.geeksforless.tfedorenko.persistence.entity.Symptom;
 import com.geeksforless.tfedorenko.service.DiseaseService;
 import com.geeksforless.tfedorenko.web.dto.DiseaseDto;
 import com.geeksforless.tfedorenko.web.dto.detail.DiseaseDetailDto;
@@ -47,4 +46,5 @@ public class DiseaseFacadeImpl implements DiseaseFacade {
     public List<Disease> findAllByIds(List<Long> disease) {
         return diseaseService.findAllByIds(disease);
     }
+
 }

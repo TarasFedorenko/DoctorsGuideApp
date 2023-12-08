@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Getter
@@ -24,6 +25,19 @@ public class Disease extends BaseEntity{
     private Set<Procedure> procedures;
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "diseases")
     private Set<Drug> drugs;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Disease disease = (Disease) o;
+        return Objects.equals(getId(), disease.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId());
+    }
 
     public Disease (){
         super();

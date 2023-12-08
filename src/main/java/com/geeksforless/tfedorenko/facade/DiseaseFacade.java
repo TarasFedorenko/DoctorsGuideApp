@@ -16,4 +16,6 @@ public interface DiseaseFacade {
     DiseaseDetailDto findByName(String name);
 
     List<Disease> findAllByIds(List<Long> disease);
+
+
 }

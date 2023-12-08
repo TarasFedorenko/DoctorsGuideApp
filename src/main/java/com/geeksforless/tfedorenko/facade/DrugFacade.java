@@ -18,5 +18,12 @@ public interface DrugFacade {
     void createDrug(Drug drug);
     void addAnalogToTempList(Long id);
 
-    Set<Drug> getTemporaryDrugs();
+   Set<Drug> getTemporaryDrugs();
+
+    Set<Disease> getTemporaryDiseases();
+
+    void removeAnalogFromNewDrug(Long drugId);
+    void addDiseaseToTempList(Long diseaseId);
+
+    void removeDiseaseFromNewDrug(Long diseaseId);
 }

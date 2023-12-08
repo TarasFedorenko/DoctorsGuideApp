@@ -81,6 +81,7 @@ public class AdminController {
         model.addAttribute("allDrugs", drugFacade.findAll());
         model.addAttribute("allDiseases", diseaseFacade.findAll());
         model.addAttribute("temporaryDrugs", drugFacade.getTemporaryDrugs());
+        model.addAttribute("temporaryDiseases", drugFacade.getTemporaryDiseases());
         model.addAttribute("drug", new Drug());
         return "page/admin/drug_create";
     }
@@ -91,10 +92,24 @@ public class AdminController {
     }
 
     @GetMapping("/drugs/addAnalog")
-    public String addAnalogToNewDrug(@RequestParam long drugId){
+    public String addAnalogToNewDrug(@RequestParam Long drugId){
         drugFacade.addAnalogToTempList(drugId);
         return "redirect:/admin/drugs/create";
     }
-
+    @GetMapping("/drugs/removeDrug")
+    public String removeAnalogFromNewDrug(@RequestParam Long drugId) {
+        drugFacade.removeAnalogFromNewDrug(drugId);
+        return "redirect:/admin/drugs/create";
+    }
+    @GetMapping("/drugs/addDisease")
+    public String addDiseaseToNewDrug(@RequestParam Long diseaseId){
+        drugFacade.addDiseaseToTempList(diseaseId);
+        return "redirect:/admin/drugs/create";
+    }
+    @GetMapping("/drugs/removeDisease")
+    public String removeDiseaseFromNewDrug(@RequestParam Long diseaseId) {
+        drugFacade.removeDiseaseFromNewDrug(diseaseId);
+        return "redirect:/admin/drugs/create";
+    }
 
 }
