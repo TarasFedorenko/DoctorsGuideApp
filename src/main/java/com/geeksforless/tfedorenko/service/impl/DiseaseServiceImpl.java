@@ -1,6 +1,7 @@
 package com.geeksforless.tfedorenko.service.impl;
 
 import com.geeksforless.tfedorenko.persistence.entity.Disease;
+import com.geeksforless.tfedorenko.persistence.entity.Drug;
 import com.geeksforless.tfedorenko.persistence.repository.DiseaseRepository;
 import com.geeksforless.tfedorenko.service.DiseaseService;
 import lombok.RequiredArgsConstructor;
@@ -34,5 +35,11 @@ public class DiseaseServiceImpl implements DiseaseService {
     @Transactional(readOnly = true)
     public Optional<Disease> findByName(String name) {
         return diseaseRepository.findByName(name);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Disease> findAllByIds(List<Long> disease) {
+        return diseaseRepository.findAllById(disease);
     }
 }

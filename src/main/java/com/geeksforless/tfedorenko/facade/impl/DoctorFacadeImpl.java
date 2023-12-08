@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 public class DoctorFacadeImpl implements DoctorFacade {
 
     private final DoctorService doctorService;
+
     @Override
     public void updateDoctor(Doctor updatedDoctor) {
         doctorService.updateDoctor(updatedDoctor);
@@ -34,8 +35,8 @@ public class DoctorFacadeImpl implements DoctorFacade {
 
     @Override
     public DoctorDetailDto getDoctor(Long id) {
-        Optional<Doctor> optionalDoctor =doctorService.findById(id);
-        return optionalDoctor.map(DoctorDetailDto::new).orElseThrow(()->new RuntimeException("doctor not found"));
+        Optional<Doctor> optionalDoctor = doctorService.findById(id);
+        return optionalDoctor.map(DoctorDetailDto::new).orElseThrow(() -> new RuntimeException("doctor not found"));
     }
 
     @Override

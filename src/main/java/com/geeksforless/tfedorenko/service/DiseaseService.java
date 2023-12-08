@@ -14,4 +14,5 @@ public interface DiseaseService {
     List<Disease> getDiseasesByFirstLetter(String letter);
 
     Optional<Disease> findByName(String name);
+    List<Disease> findAllByIds(List<Long> disease);
 }

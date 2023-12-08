@@ -42,4 +42,9 @@ public class DiseaseFacadeImpl implements DiseaseFacade {
                     .map(DiseaseDetailDto::new)
                     .orElseThrow(() -> new RuntimeException("Disease not found"));
     }
+
+    @Override
+    public List<Disease> findAllByIds(List<Long> disease) {
+        return diseaseService.findAllByIds(disease);
+    }
 }

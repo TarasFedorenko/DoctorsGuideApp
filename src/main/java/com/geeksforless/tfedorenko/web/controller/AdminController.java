@@ -1,5 +1,6 @@
 package com.geeksforless.tfedorenko.web.controller;
 
+import com.geeksforless.tfedorenko.facade.DiseaseFacade;
 import com.geeksforless.tfedorenko.facade.DoctorFacade;
 import com.geeksforless.tfedorenko.facade.DrugFacade;
 import com.geeksforless.tfedorenko.persistence.entity.Drug;
@@ -20,6 +21,7 @@ public class AdminController {
 
     private final DoctorFacade doctorFacade;
     private final DrugFacade drugFacade;
+    private final DiseaseFacade diseaseFacade;
 
     @GetMapping("/home")
     public String home() {
@@ -76,13 +78,23 @@ public class AdminController {
     }
     @GetMapping("/drugs/create")
     public String createDrug(Model model){
-        model.addAttribute("drug",new Drug());
+        model.addAttribute("allDrugs", drugFacade.findAll());
+        model.addAttribute("allDiseases", diseaseFacade.findAll());
+        model.addAttribute("temporaryDrugs", drugFacade.getTemporaryDrugs());
+        model.addAttribute("drug", new Drug());
         return "page/admin/drug_create";
     }
     @PostMapping("/drugs/create")
     public String createDrugForm(@ModelAttribute Drug drug){
         drugFacade.createDrug(drug);
-        return "redirect:/admin/drug/list";
+        return "redirect:/admin/drugs/list";
     }
+
+    @GetMapping("/drugs/addAnalog")
+    public String addAnalogToNewDrug(@RequestParam long drugId){
+        drugFacade.addAnalogToTempList(drugId);
+        return "redirect:/admin/drugs/create";
+    }
+
 
 }

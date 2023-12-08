@@ -6,12 +6,94 @@
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
       layout:decorate="~{fragments/admin_layout}">
 <head>
-  <meta charset="UTF-8">
-  <title>Менеджмент ліків</title>
+    <meta charset="UTF-8">
+    <title>Створення ліків</title>
 </head>
 <body>
 <div layout:fragment="admin_content">
+    <h2>Создание препарата</h2>
 
+    <form th:action="@{/admin/drugs/create}" method="post" th:object="${drug}">
+
+        <!-- Название препарата -->
+        <label for="name">Название препарата:</label>
+        <input type="text" id="name" name="name" th:field="*{name}" required><br>
+
+        <!-- Описание -->
+        <label for="description">Описание:</label>
+        <textarea id="description" name="description" th:field="*{description}"></textarea><br>
+
+        <!-- Артикул -->
+        <label for="article">Артикул:</label>
+        <input type="text" id="article" name="article" th:field="*{article}"><br>
+
+        <!-- Доза -->
+        <label for="doseValue">Доза (значение):</label>
+        <input type="number" id="doseValue" name="doseValue" step="0.01" th:field="*{doseValue}" required><br>
+
+        <!-- Единица измерения дозы -->
+        <label for="doseUnit">Единица измерения дозы:</label>
+        <input type="text" id="doseUnit" name="doseUnit" th:field="*{doseUnit}"><br>
+
+        <!-- Группа препарата -->
+      <label for="drug_group">Drug group:</label>
+      <select id="drug_group" name="drug_group" th:field="*{drugGroup}">
+        <option value="ANALGESICS">ANALGESICS</option>
+        <option value="ANTIBIOTICS">ANTIBIOTICS</option>
+        <option value="DIURETICS">DIURETICS</option>
+        <option value="ANTISEPTICS">ANTISEPTICS</option>
+        <option value="SPASMOLYTICS">SPASMOLYTICS</option>
+      </select>
+
+        <!-- Количество -->
+        <label for="quantity">Количество:</label>
+        <input type="number" id="quantity" name="quantity" th:field="*{quantity}" required><br>
+
+        <!-- Выпадающий список для выбора лекарств -->
+
+        <form th:action="@{/admin/drugs/addAnalog}" method="post">
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    Оберіть аналоги:
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li th:each="drug : ${allDrugs}">
+                        <button type="submit" class="dropdown-item" name="selectedDrugId" th:value="${drug.id}" th:text="${drug.name}"></button>
+                        <a th:href="@{/admin/drugs/addAnalog(drugId=${drug.id})}" class="add">+</a>
+                    </li>
+                </ul>
+                <h4>Drug List</h4>
+                <ul>
+                    <li th:each="drug : ${temporaryDrugs}">
+                        <p th:text="${drug.name}"></p>
+                        <a th:href="@{/admin/drugs/removeDrug(drugId=${drug.id})}" class="remove-icon">X</a>
+                    </li>
+                </ul>
+            </div>
+        </form>
+        <form th:action="@{/admin/drugs/addDisease}" method="post">
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                    Додати до хвороби:
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li th:each="disease : ${allDiseases}">
+                        <button type="submit" class="dropdown-item" name="selectedDiseaseId" th:value="${disease.id}" th:text="${disease.name}"></button>
+                        <a th:href="@{/admin/drugs/addDisease(drugId=${drug.id})}" class="add">+</a>
+                    </li>
+                </ul>
+                <h4>Drug List</h4>
+                <ul>
+                    <li th:each="disease : ${temporaryDisease}">
+                        <p th:text="${disease.name}"></p>
+                        <a th:href="@{/admin/drugs/removeDrug(diseaseId=${disease.id})}" class="remove-icon">X</a>
+                    </li>
+                </ul>
+            </div>
+        </form>
+
+        <button type="submit">Создать препарат</button>
+    </form>
 </div>
 </body>
 </html>
