@@ -19,7 +19,7 @@ public class Drug extends BaseEntity {
     private String name;
     @Column(name = "description",  columnDefinition = "TEXT")
     private String description;
-    @Column(name = "article")
+    @Column(name = "article", unique = true)
     private String article;
     @Column(name = "dose_value", precision = 10, scale = 2)
     private double doseValue;

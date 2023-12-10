@@ -128,6 +128,16 @@ public class DrugFacadeImpl implements DrugFacade {
         temporaryDiseases.removeIf(disease ->Objects.equals(disease.getId(), diseaseId));
     }
 
+    @Override
+    public void updateDrug(Drug drug) {
+        drugService.updateDrug(drug);
+
+    }
+
+    @Override
+    public void removeDrug(Long id) {
+        drugService.removeDrug(id);
+    }
 
 
 }

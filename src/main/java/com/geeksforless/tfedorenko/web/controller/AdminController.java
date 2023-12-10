@@ -25,7 +25,7 @@ public class AdminController {
 
     @GetMapping("/home")
     public String home() {
-        return "/page/admin/home";
+        return "page/admin/home";
     }
 
     @GetMapping("/doctors/list")
@@ -110,6 +110,22 @@ public class AdminController {
     public String removeDiseaseFromNewDrug(@RequestParam Long diseaseId) {
         drugFacade.removeDiseaseFromNewDrug(diseaseId);
         return "redirect:/admin/drugs/create";
+    }
+    @GetMapping("/drugs/update/{id}")
+    public String showDrugDetail(Model model, @PathVariable Long id){
+        model.addAttribute("drug", drugFacade.findById(id));
+        return "page/admin/drug_update";
+    }
+
+    @PostMapping("/drugs/update")
+    public String updateDrug(@ModelAttribute Drug drug){
+        drugFacade.updateDrug(drug);
+        return "redirect:/admin/drugs/update/" + drug.getId();
+    }
+    @GetMapping("/drugs/delete/{id}")
+    public String removeDrug(@PathVariable Long id) {
+        drugFacade.removeDrug(id);
+        return "redirect:/admin/drugs/list";
     }
 
 }

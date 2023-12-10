@@ -11,7 +11,74 @@
 </head>
 <body>
 <div layout:fragment="admin_content">
+  <div>
+    <h2>Деталі ліків</h2>
+    <form action="/admin/drugs/update" method="post" th:object="${drug}">
 
+      <label for="id"></label>
+      <input type="hidden" id="id" name="id" th:field="*{id}">
+
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" th:field="*{name}">
+
+      <label for="description">Description:</label>
+      <input type="text" id="description" name="description" th:field="*{description}">
+
+      <label for="article">Article:</label>
+      <input type="text" id="article" name="article" th:field="*{article}">
+
+      <label for="doseValue">Dose Value:</label>
+      <input type="text" id="doseValue" name="doseValue" th:field="*{doseValue}">
+
+      <label for="doseUnit">Dose Unit:</label>
+      <input type="text" id="doseUnit" name="doseUnit" th:field="*{doseUnit}">
+
+      <label for="drug_group">Drug group:</label>
+      <select id="drug_group" name="drug_group" th:field="*{drugGroup}">
+        <option value="ANALGESICS">Знеболюючі</option>
+        <option value="ANTIBIOTICS">Антибіотики</option>
+        <option value="DIURETICS">Сечогінні</option>
+        <option value="ANTISEPTICS">Антисептики</option>
+        <option value="SPASMOLYTICS">Спазмолітики</option>
+      </select>
+
+
+      <button type="submit">Save Changes</button>
+    </form>
+    <table border="3">
+      <thead>
+      <tr>
+        <th>№ препарату</th>
+        <th>Назва</th>
+        <th>Група</th>
+        <th>Дозування</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="analog : ${drug.analogs}">
+        <td th:text="${analog.id}"></td>
+        <td th:text="${analog.name}"></td>
+        <td th:text="${analog.drugGroup}"></td>
+      </tr>
+      </tbody>
+    </table>
+    <table border="3">
+      <thead>
+      <tr>
+        <th>№ хвороби</th>
+        <th>Назва</th>
+        <th>Клас</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="disease : ${drug.diseases}">
+        <td th:text="${disease.id}"></td>
+        <td th:text="${disease.name}"></td>
+        <td th:text="${disease.diseaseClass.toString()}"></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
 </body>
 </html>

@@ -8,9 +8,7 @@ body {
 main {
     flex: 1;
 }
-footer {
-    flex-shrink: 0;
-}
+
 
 h1{
     font-family: "Times New Roman", sans-serif;

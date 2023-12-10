@@ -26,4 +26,8 @@ public interface DrugFacade {
     void addDiseaseToTempList(Long diseaseId);
 
     void removeDiseaseFromNewDrug(Long diseaseId);
+
+    void updateDrug(Drug drug);
+
+    void removeDrug(Long id);
 }

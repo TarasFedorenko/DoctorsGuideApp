@@ -50,4 +50,18 @@ public class DrugServiceImpl implements DrugService{
     public void saveDrug(Drug drug) {
         drugRepository.save(drug);
     }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRES_NEW, isolation = Isolation.REPEATABLE_READ, rollbackFor = Exception.class)
+    public void updateDrug(Drug drug) {
+        drugRepository.save(drug);
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRES_NEW, isolation = Isolation.REPEATABLE_READ, rollbackFor = Exception.class)
+    public void removeDrug(Long id) {
+        Drug drug = drugRepository.findById(id).orElseThrow(() -> new RuntimeException("drug not found"));
+        drugRepository.delete(drug);
+
+    }
 }
