@@ -1,5 +1,6 @@
 body {
     font-family: "Times New Roman", sans-serif;
+    color: black;
     margin: 0;
     padding: 0;
     display: flex;
@@ -57,6 +58,11 @@ footer {
     color: #fff;
     padding: 10px;
     text-align: center;
+    position:fixed;
+    left:0px;
+    bottom:0px;
+    height:30px;
+    width:100%;
 }
 
 footer img {
