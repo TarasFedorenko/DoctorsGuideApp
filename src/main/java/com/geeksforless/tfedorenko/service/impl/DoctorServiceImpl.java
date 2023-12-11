@@ -71,4 +71,9 @@ public class DoctorServiceImpl implements DoctorService {
         doctor.setPassword(encodedPass);
         doctorRepository.save(doctor);
     }
+
+    @Override
+    public boolean existsByEmail(String email) {
+        return doctorRepository.existsByEmail(email);
+    }
 }

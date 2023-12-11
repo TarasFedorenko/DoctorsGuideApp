@@ -21,4 +21,6 @@ public interface DoctorService {
     void removeDoctor(Long id);
 
     void createDoctor(Doctor doctor);
+
+    boolean existsByEmail(String email);
 }
