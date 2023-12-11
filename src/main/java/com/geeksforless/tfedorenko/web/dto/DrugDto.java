@@ -3,12 +3,14 @@ package com.geeksforless.tfedorenko.web.dto;
 import com.geeksforless.tfedorenko.persistence.entity.Drug;
 import com.geeksforless.tfedorenko.persistence.type.DrugGroup;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Date;
 
 @Getter
 @Setter
+@NoArgsConstructor
 public class DrugDto {
     private Long id;
     private String name;

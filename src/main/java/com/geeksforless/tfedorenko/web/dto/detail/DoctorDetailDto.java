@@ -5,37 +5,27 @@ import com.geeksforless.tfedorenko.persistence.entity.user.Doctor;
 import com.geeksforless.tfedorenko.persistence.type.DepartmentType;
 import com.geeksforless.tfedorenko.persistence.type.Gender;
 import com.geeksforless.tfedorenko.web.dto.AppointmentDto;
+import com.geeksforless.tfedorenko.web.dto.DoctorDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.apache.commons.collections4.CollectionUtils;
 
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Getter
 @Setter
 @NoArgsConstructor
-public class DoctorDetailDto {
-    private Long id;
-    private Date created;
-    private boolean isActive;
-    private String email;
-    private String firstName;
-    private String lastName;
+public class DoctorDetailDto extends DoctorDto {
+
     private Integer age;
     private Gender gender;
     private DepartmentType departmentType;
     private List<AppointmentDto> appointments;
 
     public DoctorDetailDto(Doctor doctor){
-        this.id=doctor.getId();
-        this.created = doctor.getCreated();
-        this.isActive = doctor.getEnable();
-        this.email = doctor.getEmail();
-        this.firstName = doctor.getFirstname();
-        this.lastName = doctor.getLastname();
+        super(doctor);
         this.age = doctor.getAge();
         this.gender = doctor.getGender();
         this.departmentType = doctor.getDepartment();

@@ -5,6 +5,7 @@ import com.geeksforless.tfedorenko.persistence.entity.Drug;
 import com.geeksforless.tfedorenko.persistence.entity.Procedure;
 import com.geeksforless.tfedorenko.persistence.entity.Symptom;
 import com.geeksforless.tfedorenko.persistence.type.DiseaseClass;
+import com.geeksforless.tfedorenko.web.dto.DiseaseDto;
 import com.geeksforless.tfedorenko.web.dto.DrugDto;
 import com.geeksforless.tfedorenko.web.dto.ProcedureDto;
 import com.geeksforless.tfedorenko.web.dto.SymptomDto;
@@ -19,23 +20,17 @@ import java.util.stream.Collectors;
 @Getter
 @Setter
 @NoArgsConstructor
-public class DiseaseDetailDto {
+public class DiseaseDetailDto extends DiseaseDto {
 
-    private Long id;
-    private String name;
-    private DiseaseClass diseaseClass;
     private Set<SymptomDto> symptoms;
     private Set<ProcedureDto> procedures;
     private Set<DrugDto> drugs;
 
     public DiseaseDetailDto(Disease disease){
-        this.id=disease.getId();
-        this.name= disease.getName();
-        this.diseaseClass = disease.getDiseaseClass();
+        super(disease);
         initSymptoms(disease);
         initProcedures(disease);
         initDrugs(disease);
-
     }
 
     private void initDrugs(Disease disease) {
@@ -58,5 +53,4 @@ public class DiseaseDetailDto {
             this.symptoms=symptomSet.stream().map(SymptomDto::new).collect(Collectors.toSet());
         }
     }
-
 }
