@@ -7,25 +7,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Процедура</title>
+    <title>Деталі Процедури</title>
     <link rel="stylesheet" href="/css/list.css">
 </head>
 <body>
 <div layout:fragment="doctor_content">
-    <div class="container">
-        <img class="disease-image" src="path/to/your/image.jpg" alt="Disease Image">
-        <div class="disease-details">
-            <h2 th:text ="${procedure.getName()}" > </h2>
-            <p th:text ="${procedure.getProcedureType()}"></p>
-            <div class="symptoms">
-                <h3>Симптомы:</h3>
-                <ul >
-                    <li th:each="disease:${procedure.getDiseases()}">
-                        <a th:href="@{/doctor/diseases/{id}(id = ${disease.getId()})}" th:text="${disease.getName()}"></a>
-                    </li>
-                </ul>
-            </div>
-        </div>
+    <div class="container text-center">
+        <h2 th:text="${procedure.getName()}"></h2>
+        <p th:text="${procedure.getProcedureType()}"></p>
+        <h5>Симптоми:</h5>
+        <ul>
+            <li th:each="disease:${procedure.getDiseases()}">
+                <a class="sml-box" th:href="@{/doctor/diseases/{id}(id = ${disease.getId()})}"
+                   th:text="${disease.getName()}"></a>
+            </li>
+        </ul>
     </div>
 </div>
 </body>

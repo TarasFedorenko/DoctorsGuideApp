@@ -8,41 +8,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Список хвороб</title>
-    <link rel = "stylesheet" href="/css/list.css">
-    <link rel = "stylesheet" href="/css/doctor.css">
-    <style>
-        /* Добавление стилей для улучшения внешнего вида букв */
-        a {
-            display: inline-block;
-            padding: 10px;
-            background-color: #f0f0f0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            text-decoration: none;
-            color: #333;
-            font-family: 'Arial', sans-serif;
-            font-size: 16px;
-            transition: background-color 0.3s ease;
-        }
-
-        a:hover {
-            background-color: #ddd;
-        }
-    </style>
+    <link href="/css/list.css" rel="stylesheet">
 </head>
 <body>
 <div layout:fragment="doctor_content">
 <div>
     <div class="container">
-        <h2 class="center">Выберите букву</h2>
+        <h2 class="center" >Хвороби</h2>
         <form th:action="@{/doctor/diseases/search}" method="get">
-            <label for="search">Поиск по болезни:</label>
-            <input type="text" id="search" name="name" placeholder="Введите название болезни">
-            <button type="submit">Искать</button>
+            <label for="search">Пошук по хворобі:</label>
+            <input type="text" id="search" name="name" placeholder="Введіть назву хвороби">
+            <button type="submit">Шукати</button>
         </form>
         <ul>
             <li th:each="letter : ${alphabet}">
-                <a th:href="@{/doctor/diseases/letter/{letter}(letter=${letter})}" th:text="${letter}"></a>
+                <a class="letter" th:href="@{/doctor/diseases/letter/{letter}(letter=${letter})}" th:text="${letter}"></a>
             </li>
         </ul>
     </div>

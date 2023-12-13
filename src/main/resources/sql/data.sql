@@ -10,6 +10,12 @@ insert into symptoms values (1,'2023-08-05', '2023-08-05','Лихоманка','
 insert into symptoms values (2,'2023-08-05', '2023-08-05','Слабкість','COMMON');
 insert into symptoms values (3,'2023-08-05', '2023-08-05','Спрага','COMMON');
 insert into symptoms values (4,'2023-08-05', '2023-08-05','Підвищене ШОЕ','LABORATORY');
+insert into symptoms values (5,'2023-08-05', '2023-08-05','Збільшення розмірів печінки','ORGAN_SPECIFIC');
+insert into symptoms values (6,'2023-08-05', '2023-08-05','Протеїнурія','LABORATORY');
+insert into symptoms values (7,'2023-08-05', '2023-08-05','Підвищенна ехогенність печінки','INSTRUMENTAL');
+insert into symptoms values (8,'2023-08-05', '2023-08-05','Лейкоцитоз','LABORATORY');
+insert into symptoms values (9,'2023-08-05', '2023-08-05','Слухові галюцінації','PSYCHOLOGICAL');
+insert into symptoms values (10,'2023-08-05', '2023-08-05','Нізький рівень гемоглобіну','LABORATORY');
 
 --  Diseases-Symptoms
 insert into disease_symptom values (1, 1);

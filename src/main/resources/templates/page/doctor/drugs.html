@@ -7,23 +7,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Список хвороб</title>
-    <link rel = "stylesheet" href="/css/list.css">
-    <link rel = "stylesheet" href="/css/doctor.css">
+    <title>Список ліків</title>
+    <link href="/css/list.css" rel="stylesheet">
 </head>
 <body>
 <div layout:fragment="doctor_content">
     <div>
         <div class="container">
-            <h2 class="center">Оберіть букву</h2>
+            <h2 class="center">Ліки</h2>
             <form th:action="@{/doctor/drugs/search}" method="get">
-                <label for="search">Пошук по хворобам:</label>
-                <input type="text" id="search" name="name" placeholder="Введіть назву хвороби">
+                <label for="search">Пошук по лікам:</label>
+                <input type="text" id="search" name="name" placeholder="Введіть назву ліків">
                 <button type="submit">Шукати</button>
             </form>
             <ul>
                 <li th:each="letter : ${alphabet}">
-                    <a th:href="@{/doctor/drugs/letter/{letter}(letter=${letter})}" th:text="${letter}"></a>
+                    <a class="letter" th:href="@{/doctor/drugs/letter/{letter}(letter=${letter})}" th:text="${letter}"></a>
                 </li>
             </ul>
         </div>

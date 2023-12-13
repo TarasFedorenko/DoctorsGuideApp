@@ -5,74 +5,108 @@
       xmlns:th="http://www.thymeleaf.org"
       layout:decorate="~{fragments/doctor_layout}">
 <head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-    <link href="/css/doctor.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>Doctors home</title>
 </head>
 <body>
 <div layout:fragment="doctor_content">
     <div>
-        <h2>Welcome, Doctor!</h2>
-        <form action="/doctor/home" method="post" th:object="${doctor}">
-
-            <label for="first_name">First name:</label>
-            <input type="text" id="first_name" name="first_name" th:field="*{firstname}">
-
-            <label for="last_name">Last name:</label>
-            <input type="text" id="last_name" name="last_name" th:field="*{lastname}">
-
-            <label for="email">E-mail:</label>
-            <input type="text" id="email" name="email" th:field="*{email}">
-
-            <label for="new_password">New Password:</label>
-            <input type="password" id="new_password" name="new_password">
-
-            <label for="age">Age:</label>
-            <input type="text" id="age" name="age" th:field="*{age}">
-
-            <label for="gender">Gender:</label>
-            <select id="gender" name="gender" th:field="*{gender}">
-                <option value="MALE">Male</option>
-                <option value="FEMALE">Female</option>
-            </select>
-
-            <label for="department">Department:</label>
-            <select id="department" name="department" th:field="*{department}">
-                <option value="THERAPEUTIC">THERAPEUTIC</option>
-                <option value="SURGICAL">SURGICAL</option>
-                <option value="CARDIOLOGICAL">CARDIOLOGICAL</option>
-                <option value="PEDIATRIC">PEDIATRIC</option>
-                <option value="PSYCHIATRIC">PSYCHIATRIC</option>
-            </select>
-
-            <button type="submit">Save Changes</button>
+        <h3 style="padding-top: 40px"> Особистий кабінет </h3>
+        &nbsp;
+        <form class="row gx-3 gy-3 align-items-center" action="/doctor/home" method="post" th:object="${doctor}">
+            <div class="row">
+                <div class="col-sm-3">
+                    <label for="first_name">Ім'я:</label>
+                    <input type="text" id="first_name" class="form-control" placeholder="Ім'я" aria-label="First name"
+                           th:field="*{firstname}">
+                </div>
+                <div class="col-sm-3">
+                    <label for="last_name">Прізвище:</label>
+                    <input type="text" id="last_name" class="form-control" placeholder="Прізвище" aria-label="Last name"
+                           th:field="*{lastname}">
+                </div>
+                <div class="col-sm-3">
+                    <label for="age">Вік:</label>
+                    <input type="text" id="age" class="form-control" placeholder="Вік" aria-label="Age"
+                           th:field="*{age}">
+                </div>
+                <div class="col-sm-3">
+                    <label for="gender">Стать:</label>
+                    <select class="form-select" id="gender">
+                        <option selected>Стать...</option>
+                        <option value="MALE">Чоловік</option>
+                        <option value="FEMALE">Жінка</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    <label for="email">Електронна пошта:</label>
+                    <input type="email" id="email" class="form-control" placeholder="Електронна пошта"
+                           aria-label="email" th:field="*{email}">
+                </div>
+                <div class="col-sm-3">
+                    <label for="new_password">Пароль:</label>
+                    <input type="password" id="new_password" class="form-control" placeholder="Зміна паролю"
+                           aria-label="new_password" name="new_password">
+                </div>
+                <div class="col-sm-3">
+                    <label for="department">Відділення:</label>
+                    <select class="form-select" id="department" th:field="*{department}">
+                        <option value="THERAPEUTIC">Терапевтичне</option>
+                        <option value="SURGICAL">Хірургічне</option>
+                        <option value="CARDIOLOGICAL">Кардіологічне</option>
+                        <option value="PEDIATRIC">Педіатричне</option>
+                        <option value="PSYCHIATRIC">Психіатричне</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row" >
+                <div class="col-sm-3" >
+                    <button type="submit" class="btn btn-primary">Зберегти</button>
+                </div>
+            </div>
         </form>
-        <table border="1">
-            <thead>
-            <tr>
-                <th>№ призначення</th>
-                <th>Дата призначення</th>
-                <th>Ім'я пацієнта</th>
-                <th>Прізвище пацієнта</th>
-                <th>Дата народження</th>
-                <th>Призначені ліки</th>
-            </tr>
-            </thead>
-            <tbody>
-            <!-- Loop through your appointment data here -->
-            <tr th:each="appointment : ${appointments}">
-                <td th:text="${appointment.id}"></td>
-                <td th:text="${#dates.format(appointment.created, 'dd-MM-yyyy')}"></td>
-                <td th:text="${appointment.firstName}"></td>
-                <td th:text="${appointment.lastName}"></td>
-                <td th:text="${#dates.format(appointment.birthDate, 'dd-MM-yyyy')}"></td>
-                <td>
-                    <!-- Loop through drugs in the appointment -->
-                    <span th:each="drug : ${appointment.drugs}" th:text="${drug.name + ' '}"></span>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+        <section class="intro">
+            <div class="mask d-flex align-items-center h-100">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-12">
+                            <div class="card bg-dark shadow-2-strong">
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-dark table-borderless mb-0">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col">№ призначення</th>
+                                                <th scope="col">Дата призначення</th>
+                                                <th scope="col">Ім'я пацієнта</th>
+                                                <th scope="col">Прізвище пацієнта</th>
+                                                <th scope="col">Дата народження</th>
+                                                <th scope="col">Призначені ліки</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr th:each="appointment : ${appointments}">
+                                                <td th:text="${appointment.id}"></td>
+                                                <td th:text="${#dates.format(appointment.created, 'dd-MM-yyyy')}"></td>
+                                                <td th:text="${appointment.firstName}"></td>
+                                                <td th:text="${appointment.lastName}"></td>
+                                                <td th:text="${#dates.format(appointment.birthDate, 'dd-MM-yyyy')}"></td>
+                                                <td>
+                                                    <span th:each="drug : ${appointment.drugs}" th:text="${drug.name + ' '}"></span>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
 </div>
 </body>

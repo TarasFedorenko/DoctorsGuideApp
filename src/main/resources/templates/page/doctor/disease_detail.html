@@ -7,66 +7,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Список хвороб</title>
+    <title>Деталі хвороби</title>
     <link rel="stylesheet" href="/css/list.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
 
-        .container {
-            display: flex;
-            align-items: center;
-        }
-
-        .disease-image {
-            max-width: 300px;
-            margin-right: 20px;
-        }
-
-        .disease-details {
-            flex: 1;
-        }
-
-        h2 {
-            color: #333;
-        }
-
-        p {
-            color: #555;
-        }
-
-        .symptoms {
-            margin-top: 20px;
-        }
-
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        li {
-            margin-bottom: 5px;
-        }
-    </style>
 </head>
 <body>
 <div layout:fragment="doctor_content">
-    <div class="container">
-        <img class="disease-image" src="path/to/your/image.jpg" alt="Disease Image">
-        <div class="disease-details">
-            <h2 th:text ="${disease.getName()}" > </h2>
+    <div class="container text-center" style="padding-top: 10px">
+            <h3 th:text ="${disease.getName()}" > </h3>
             <p th:text ="${disease.getDiseaseClass()}"></p>
-            <div class="symptoms">
-                <h3>Симптомы:</h3>
+            <div>
+                <h5>Симптоми: </h5>
                 <ul >
                     <li th:each="symptom:${disease.getSymptoms()}">
-                        <a th:href="@{/doctor/symptoms/{id}(id = ${symptom.getId()})}" th:text="${symptom.getName()}"></a>
+                        <a class="sml-box" th:href="@{/doctor/symptoms/{id}(id = ${symptom.id})}" th:text="${symptom.getName()}"></a>
+                    </li>
+                </ul>
+                <h5>Рекомендовані процедури: </h5>
+                <ul >
+                    <li th:each="procedure:${disease.getProcedures()}">
+                        <a class="sml-box" th:href="@{/doctor/procedures/{id}(id = ${procedure.id})}" th:text="${procedure.getName()}"></a>
+                    </li>
+                </ul>
+                <h5>Рекомендовані препарати: </h5>
+                <ul >
+                    <li th:each="drug:${disease.getDrugs()}">
+                        <a class="sml-box" th:href="@{/doctor/drugs/{id}(id = ${drug.getId()})}" th:text="${drug.getName()}"></a>
                     </li>
                 </ul>
             </div>
-        </div>
     </div>
 </div>
 </body>

@@ -22,7 +22,7 @@ public class ProcedureDetailDto extends ProcedureDto {
     private Set<DiseaseDto> diseases;
 
     public ProcedureDetailDto(Procedure procedure) {
-        super();
+        super(procedure);
         this.procedureType = procedure.getProcedureType();
         initDiseases(procedure);
     }

@@ -8,7 +8,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link href="/css/doctor.css" rel="stylesheet">
 </head>
 <body>
 <div layout:fragment="main_content">
@@ -16,16 +15,43 @@
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         </form>
         <header>
-            <h1>Приватна клініка</h1>
-            <nav>
-                <a th:href="@{/doctor/diseases}">Хвороби</a>
-                <a th:href="@{/doctor/symptoms}">Симптоми</a>
-                <a th:href="@{/doctor/procedures}">Процедури</a>
-                <a th:href="@{/doctor/drugs}">Ліки</a>
-                <a th:href="@{/doctor/appointment}">Призначення</a>
-                <a th:href="@{/doctor/home}"><i class="fa fa-envelope" aria-hidden="true"
-                                               sec:authentication="name"> </i></a>
-                <a class="nav-item nav-link" onclick="document.forms['logoutForm'].submit()" style="cursor: pointer !important;">Вихід</a>
+            <nav class="navbar navbar-expand-lg navbar-light fixed-top mask-custom shadow-0">
+                <div class="container">
+                    <a class="navbar-brand" th:href="@{/}" href="#!"><span style="color: #5e9693;">Приватна </span><span style="color: #0086fe;">клініка</span></a>
+                    <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
+                            data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                            aria-label="Toggle navigation">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" th:href="@{/doctor/diseases}">Хвороби</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" th:href="@{/doctor/symptoms}">Симптоми</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" th:href="@{/doctor/procedures}">Процедури</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" th:href="@{/doctor/drugs}">Ліки</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" th:href="@{/doctor/appointment}">Призначення</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" th:href="@{/doctor/home}"><i class="fa fa-envelope" aria-hidden="true"
+                                                                                 sec:authentication="name"> </i></a>
+                            </li>
+                        </ul>
+                        <ul class="navbar-nav d-flex flex-row">
+                            <li class="nav-item me-3 me-lg-0">
+                                <a class="nav-link" onclick="document.forms['logoutForm'].submit()" style="cursor: pointer !important;">Вихід</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </nav>
         </header>
     <div layout:fragment="doctor_content"></div>

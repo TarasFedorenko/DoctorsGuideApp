@@ -7,32 +7,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Список хвороб</title>
+    <title>Деталі препарата</title>
     <link rel="stylesheet" href="/css/list.css">
 </head>
 <body>
 <div layout:fragment="doctor_content">
-    <div class="container">
-        <img class="disease-image" src="path/to/your/image.jpg" alt="Disease Image">
-        <div class="disease-details">
-            <h2 th:text="${drug.name}"></h2>
-            <p th:text="${drug.description}"></p>
-            <p th:text="${drug.article}"></p>
-            <p th:text="${drug.drugGroup}"></p>
-            <p th:text="${drug.doseValue +' '+ drug.doseUnit}"></p>
-            <div class="symptoms">
-                <h3>Лікі:</h3>
-                <ul>
-                    <li th:each="disease : ${drug.getDiseases()}">
-                        <a th:href="@{/doctor/diseases/{id}(id = ${disease.getId()})}"
-                           th:text="${disease.getName()}"></a>
-                    </li>
-                </ul>
-                <h3>DOSES : </h3>
-                <form  th:action="@{/doctor/drugs/{id}/add(id=${drug.id})}" method="post">
-                    <button type="submit">Assign</button>
-                </form>
-            </div>
+    <div class="container text-center "style="padding-top: 10px">
+        <h3 th:text="${drug.name}"></h3>
+        <p th:text="${drug.description}"></p>
+        <p th:text="${drug.article}"></p>
+        <p th:text="${drug.drugGroup}"></p>
+        <p th:text="${drug.doseValue +' '+ drug.doseUnit}"></p>
+        <div class="symptoms">
+            <h5>Хвороби: </h5>
+            <ul>
+                <li th:each="disease : ${drug.getDiseases()}">
+                    <a class="sml-box" th:href="@{/doctor/diseases/{id}(id = ${disease.getId()})}"
+                       th:text="${disease.getName()}"></a>
+                </li>
+            </ul>
+            <form th:action="@{/doctor/drugs/{id}/add(id=${drug.id})}" method="post">
+                <button type="submit" class="btn btn-primary">Додати до призначення</button>
+            </form>
         </div>
     </div>
 </div>

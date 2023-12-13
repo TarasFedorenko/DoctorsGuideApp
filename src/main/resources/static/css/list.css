@@ -1,4 +1,6 @@
-.container {
+@import url('https://fonts.googleapis.com/css?family=Numans');
+
+.container_for_list {
     text-align: center;
     margin-top: 50px;
 }
@@ -25,4 +27,53 @@ ul {
 
 li {
     margin: 5px;
+}
+.letter {
+    display: inline-block;
+    padding: 25px;
+    background-color: #e1dcdc;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    text-decoration: none;
+    color: #131313;
+    font-family: 'Numans', sans-serif;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+}
+.mid-box {
+    display: inline-block;
+    padding: 15px;
+    background-color: #e1dcdc;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    text-decoration: none;
+    color: #131313;
+    font-family: 'Numans', sans-serif;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+}
+.mid-box:hover {
+    background-color: #6574a4;
+}
+.sml-box {
+    display: inline-block;
+    padding: 6px;
+    background-color: #e1dcdc;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    text-decoration: none;
+    color: #131313;
+    font-family: 'Numans', sans-serif;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+}
+.sml-box:hover {
+    background-color: #6574a4;
+}
+
+.letter:hover {
+    background-color: #6574a4;
+}
+h2{
+    padding-top: 40px;
 }

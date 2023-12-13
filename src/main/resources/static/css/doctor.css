@@ -22,19 +22,6 @@ header {
     padding: 10px;
 }
 
-nav {
-    display: flex;
-    justify-content: space-around;
-    background-color: #444;
-    padding: 10px;
-    border-radius: 20px;
-}
-
-nav a {
-    color: #fff;
-    text-decoration: none;
-}
-
 .clinic-card {
     margin: 20px;
     padding: 20px;
@@ -68,15 +55,4 @@ footer {
 footer img {
     height: 30px;
     margin-right: 10px;
-}
-
-.social-icons {
-    display: flex;
-    justify-content: center;
-    margin-top: 10px;
-}
-
-.social-icons img {
-    height: 20px;
-    margin: 0 5px;
 }

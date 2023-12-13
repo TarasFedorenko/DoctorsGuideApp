@@ -3,7 +3,6 @@
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
       layout:decorate="~{fragments/doctor_layout}">
 <head>
     <meta charset="UTF-8">
@@ -14,21 +13,41 @@
 <body>
 <div layout:fragment="doctor_content">
     <div class="container">
-        <h2>New Appointment</h2>
-
-        <form th:action="@{/doctor/appointment/save}" method="post" th:object="${newAppointment}">
-            <label>First Name: <input type="text" th:field="*{firstName}"/></label>
-            <label>Last Name: <input type="text" th:field="*{lastName}"/></label>
-            <label>Date of Birth: <input type="date" th:field="*{birthDate}"/></label>
-            <h3>Drug List</h3>
+        <h3 style="padding-top: 20px">Нове призначення</h3>
+        &nbsp;
+        <form class="row gx-3 gy-3 align-items-center" th:action="@{/doctor/appointment/save}" method="post"
+              th:object="${newAppointment}">
+            <div class="row">
+                <div class="col-4 ">
+                    <label for="first_name">First Name: </label>
+                    <input type="text" id="first_name" class="form-control" placeholder="Ім'я" aria-label="First name"
+                           th:field="*{firstName}" >
+                </div>
+                <div class="col-4">
+                    <label for="last_name">Last Name:</label>
+                    <input type="text" id="last_name" class="form-control" placeholder="Прізвище" aria-label="Last name"
+                           th:field="*{lastName}" />
+                </div>
+                <div class="col-4">
+                    <label for="date_of_birth">Date of Birth:</label>
+                    <input type="date" id="date_of_birth" class="form-control" placeholder="Дата народження"
+                           aria-label="Date of birth" th:field="*{birthDate}" />
+                </div>
+            </div>
+            <h5>Список призначених препаратів</h5>
             <ul>
                 <li th:each="drug : ${temporaryDrugs}">
                     <p th:text="${drug.name}"></p>
-                    <label>Quantity: <input type="number" th:field="*{drugQuantities[__${drug.id}__]}" min="1" value="1"/></label>
+                    <label>Кількість: <input type="number" th:field="*{drugQuantities[__${drug.id}__]}" min="1"
+                                            value="1"/></label>
                     <a th:href="@{/doctor/appointment/removeDrug(drugId=${drug.id})}" class="remove-icon">X</a>
                 </li>
             </ul>
-            <button type="submit">Assign Appointment</button>
+            <div class="row">
+                <div class="col-auto" style="padding-bottom: 20px; padding-top: 20px; width: 100%">
+                    <button type="submit" class="btn btn-primary">Призначити</button>
+                </div>
+            </div>
         </form>
     </div>
 </div>

@@ -1,10 +1,12 @@
 @import url('https://fonts.googleapis.com/css?family=Numans');
 
 html,body {
+    padding-top: 20px;
     background-image: url('../images/clinic_view.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     height: 100%;
+
     font-family: 'Numans', sans-serif;
 }
 
@@ -13,33 +15,15 @@ html,body {
     align-content: center;
 }
 
-.card {
+.card-login {
     height: 370px;
     margin-top: auto;
     margin-bottom: auto;
     width: 400px;
     background-color: rgba(0,0,0,0.5) !important;
 }
-
-.social_icon span {
-    font-size: 60px;
-    margin-left: 10px;
-    color: #FFC312;
-}
-
-.social_icon span:hover {
-    color: white;
-    cursor: pointer;
-}
-
 .card-header h3 {
     color: white;
-}
-
-.social_icon {
-    position: absolute;
-    right: 20px;
-    top: -45px;
 }
 
 .input-group-prepend span {
@@ -48,7 +32,6 @@ html,body {
     color: black;
     border:0 !important;
 }
-
 input:focus {
     outline: 0 0 0 0 !important;
     box-shadow: 0 0 0 0 !important;
@@ -71,4 +54,57 @@ input:focus {
 
 .links a {
     margin-left: 4px;
+}
+
+.navbar-scroll .nav-link,
+.navbar-scroll .navbar-toggler-icon,
+.navbar-scroll .navbar-brand {
+    color: #fff;
+}
+
+
+.navbar-scrolled .nav-link,
+.navbar-scrolled .navbar-toggler-icon,
+.navbar-scrolled .navbar-brand {
+    color: #fff;
+}
+
+
+.navbar-scroll,
+.navbar-scrolled {
+    background-color: #cbbcb1;
+}
+
+.mask-custom {
+    backdrop-filter: blur(5px);
+    background-color: rgba(255, 255, 255, .15);
+}
+
+.navbar-brand {
+    font-size: 1.75rem;
+    letter-spacing: 3px;
+}
+.intro {
+    height: 100%;
+}
+
+table td,
+table th {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+thead th,
+tbody th {
+    color: #fff;
+}
+
+tbody td {
+    font-weight: 500;
+    color: rgba(255,255,255,.65);
+}
+
+.card {
+    border-radius: .5rem;
 }

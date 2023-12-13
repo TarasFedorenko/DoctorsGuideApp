@@ -9,12 +9,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Процедури</title>
+    <link href="/css/list.css" rel="stylesheet">
 </head>
 <body>
 <div layout:fragment="doctor_content">
-    <div th:each=" type : ${procedureTypes}">
-        <a th:href="@{/doctor/procedures/type/{type}(type=${type})}" th:text="${type}"></a>
+    <div class="container">
+        <h2 class="center">Процедури</h2>
+        <ul>
+            <li th:each=" type : ${procedureTypes}">
+                <a class="letter" th:href="@{/doctor/procedures/type/{type}(type=${type})}" th:text="${type}"></a>
+            </li>
+        </ul>
     </div>
+</div>
 </div>
 </body>
 </html>

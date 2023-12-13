@@ -8,15 +8,20 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Симптомы</title>
+    <title>Симптоми</title>
+    <link href="/css/list.css" rel="stylesheet">
 </head>
 <body>
 <div layout:fragment="doctor_content">
-
-
-<div th:each="symptomType : ${symptomTypes}">
-    <a th:href="@{/doctor/symptoms/type/{type}(type=${symptomType})}" th:text="${symptomType}"></a>
-</div>
+    <div class="container">
+        <h2 class="center">Симптоми</h2>
+        <ul>
+            <li th:each="symptomType : ${symptomTypes}">
+                <a class="letter" th:href="@{/doctor/symptoms/type/{type}(type=${symptomType})}"
+                   th:text="${symptomType}"></a>
+            </li>
+        </ul>
+    </div>
 </div>
 </body>
 </html>

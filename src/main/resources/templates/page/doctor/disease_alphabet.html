@@ -7,15 +7,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Список хвороб</title>
+    <title>Хвороби на букву</title>
     <link rel="stylesheet" href="/css/list.css">
 </head>
 <body>
 <div layout:fragment="doctor_content">
-    <h2>Болезни, начинающиеся с буквы <span th:text="${#strings.toUpperCase(letter)}"></span></h2>
+    <h3 style="padding-top: 10px">Хвороби що починаються з <span th:text="${#strings.toUpperCase(letter)}"></span></h3>
     <ul>
         <li th:each="disease : ${diseases}">
-            <a th:href="@{/doctor/diseases/{id}(id=${disease.getId()})}" th:text="${disease.getName()}"></a>
+            <a class="mid-box" th:href="@{/doctor/diseases/{id}(id=${disease.getId()})}" th:text="${disease.getName()}"></a>
         </li>
     </ul>
 </div>
