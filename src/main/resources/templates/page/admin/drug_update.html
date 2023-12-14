@@ -3,81 +3,144 @@
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
       layout:decorate="~{fragments/admin_layout}">
 <head>
   <meta charset="UTF-8">
-  <title>Менеджмент ліків</title>
+  <title>Деталі ліків</title>
 </head>
 <body>
 <div layout:fragment="admin_content">
   <div>
-    <h2>Деталі ліків</h2>
-    <form action="/admin/drugs/update" method="post" th:object="${drug}">
-
-      <label for="id"></label>
-      <input type="hidden" id="id" name="id" th:field="*{id}">
-
-      <label for="name">Name:</label>
-      <input type="text" id="name" name="name" th:field="*{name}">
-
-      <label for="description">Description:</label>
-      <input type="text" id="description" name="description" th:field="*{description}">
-
-      <label for="article">Article:</label>
-      <input type="text" id="article" name="article" th:field="*{article}">
-
-      <label for="doseValue">Dose Value:</label>
-      <input type="text" id="doseValue" name="doseValue" th:field="*{doseValue}">
-
-      <label for="doseUnit">Dose Unit:</label>
-      <input type="text" id="doseUnit" name="doseUnit" th:field="*{doseUnit}">
-
-      <label for="drug_group">Drug group:</label>
-      <select id="drug_group" name="drug_group" th:field="*{drugGroup}">
-        <option value="ANALGESICS">Знеболюючі</option>
-        <option value="ANTIBIOTICS">Антибіотики</option>
-        <option value="DIURETICS">Сечогінні</option>
-        <option value="ANTISEPTICS">Антисептики</option>
-        <option value="SPASMOLYTICS">Спазмолітики</option>
-      </select>
-
-
-      <button type="submit">Save Changes</button>
+    <div class="d-flex justify-content-center">
+    <h2 style="padding-top: 40px">Деталі ліків</h2>
+      </div>
+    &nbsp;
+    <form class="row gx-3 gy-3 align-items-center" th:action="@{/admin/drugs/update}" method="post"
+          th:object="${drug}">
+      <div class="row">
+        <div class="col-sm-4">
+          <label for="id">№ препарату: </label>
+          <input type="text" id="id" class="form-control" placeholder="id" aria-label="id"
+                 th:field="*{id}">
+        </div>
+        <div class="col-sm-4">
+          <label for="name">Назва препарату: </label>
+          <input type="text" id="name" class="form-control" placeholder="name" aria-label="name"
+                 th:field="*{name}">
+        </div>
+        <div class="col-sm-4">
+          <label for="description">Опис властивостей:</label>
+          <input type="text" id="description" class="form-control" placeholder="description" aria-label="description"
+                 th:field="*{description}">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-3">
+            <label for="article">Артикул: </label>
+            <input type="text" id="article" class="form-control" placeholder="article" aria-label="article"
+                   th:field="*{article}">
+          </div>
+        <div class="col-sm-3">
+          <label for="doseValue">Розмір дози: </label>
+          <input type="text" id="doseValue" class="form-control" placeholder="doseValue" aria-label="doseValue"
+                 th:field="*{doseValue}">
+        </div>
+        <div class="col-sm-3">
+          <label for="doseUnit">Одиниці виміру: </label>
+          <input type="number" id="doseUnit" class="form-control" placeholder="doseUnit" aria-label="doseUnit"
+                 th:field="*{doseUnit}">
+        </div>
+        <div class="col-sm-3">
+          <label for="drug_group">Фармакологічна група: </label>
+          <select class="form-select" id="drug_group" name="drug_group" th:field="*{drugGroup}">
+            <option value="ANALGESICS">Знеболюючі</option>
+            <option value="ANTIBIOTICS">Антибіотики</option>
+            <option value="DIURETICS">Сечогінні</option>
+            <option value="ANTISEPTICS">Антисептики</option>
+            <option value="SPASMOLYTICS">Спазмолітики</option>
+          </select>
+        </div>
+        </div>
+      <div class="row">
+        <div class="col-sm-3">
+          <button type="submit" class="btn btn-primary">Зберегти</button>
+        </div>
+      </div>
     </form>
-    <table border="3">
-      <thead>
-      <tr>
-        <th>№ препарату</th>
-        <th>Назва</th>
-        <th>Група</th>
-        <th>Дозування</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr th:each="analog : ${drug.analogs}">
-        <td th:text="${analog.id}"></td>
-        <td th:text="${analog.name}"></td>
-        <td th:text="${analog.drugGroup}"></td>
-      </tr>
-      </tbody>
-    </table>
-    <table border="3">
-      <thead>
-      <tr>
-        <th>№ хвороби</th>
-        <th>Назва</th>
-        <th>Клас</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr th:each="disease : ${drug.diseases}">
-        <td th:text="${disease.id}"></td>
-        <td th:text="${disease.name}"></td>
-        <td th:text="${disease.diseaseClass.toString()}"></td>
-      </tr>
-      </tbody>
-    </table>
+    <div class="d-flex justify-content-center">
+      <h4> Аналоги препарата</h4>
+    </div>
+    &nbsp;
+    <section class="intro">
+      <div class="mask d-flex align-items-center h-100">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-12">
+              <div class="card bg-dark shadow-2-strong">
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table class="table table-dark table-borderless mb-0">
+                      <thead>
+                      <tr>
+                        <th>№ препарату</th>
+                        <th>Назва</th>
+                        <th>Група</th>
+                        <th>Артикул</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr th:each="analog : ${drug.analogs}">
+                        <td th:text="${analog.id}"></td>
+                        <td th:text="${analog.name}"></td>
+                        <td th:text="${analog.drugGroup}"></td>
+                        <td th:text="${analog.article}"></td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="d-flex justify-content-center">
+      <h4> Хвороби при якіх призначають дані ліки</h4>
+    </div>
+    &nbsp;
+    <section class="intro">
+      <div class="mask d-flex align-items-center h-100">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-12">
+              <div class="card bg-dark shadow-2-strong">
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table class="table table-dark table-borderless mb-0">
+                      <thead>
+                      <tr>
+                        <th>№ хвороби</th>
+                        <th>Назва</th>
+                        <th>Клас</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr th:each="disease : ${drug.diseases}">
+                        <td th:text="${disease.id}"></td>
+                        <td th:text="${disease.name}"></td>
+                        <td th:text="${disease.diseaseClass.toString()}"></td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </div>
 </div>
 </body>

@@ -14,8 +14,8 @@
 <div layout:fragment="doctor_content">
     <div class="container text-center">
         <h2 th:text="${procedure.getName()}"></h2>
-        <p th:text="${procedure.getProcedureType()}"></p>
-        <h5>Симптоми:</h5>
+        <h4 th:text="${procedure.getProcedureType()}"></h4>
+        <h5>Хвороби: </h5>
         <ul>
             <li th:each="disease:${procedure.getDiseases()}">
                 <a class="sml-box" th:href="@{/doctor/diseases/{id}(id = ${disease.getId()})}"

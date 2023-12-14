@@ -8,104 +8,126 @@
 <head>
     <meta charset="UTF-8">
     <title>Створення ліків</title>
-    <!-- Включите jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
-
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"
+            integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
 </head>
 <body>
 <div layout:fragment="admin_content">
-    <h2>Создание препарата</h2>
-
-    <form id="drugForm" th:action="@{/admin/drugs/create}" method="post" th:object="${drug}">
-        <!-- Название препарата -->
-        <label for="name">Название препарата:</label>
-        <input type="text" id="name" name="name" th:field="*{name}" required><br>
-
-        <!-- Описание -->
-        <label for="description">Описание:</label>
-        <textarea id="description" name="description" th:field="*{description}"></textarea><br>
-
-        <!-- Артикул -->
-        <label for="article">Артикул:</label>
-        <input type="text" id="article" name="article" th:field="*{article}"><br>
-
-        <!-- Доза -->
-        <label for="doseValue">Доза (значение):</label>
-        <input type="number" id="doseValue" name="doseValue" step="0.01" th:field="*{doseValue}" required><br>
-
-        <!-- Единица измерения дозы -->
-        <label for="doseUnit">Единица измерения дозы:</label>
-        <input type="text" id="doseUnit" name="doseUnit" th:field="*{doseUnit}"><br>
-
-        <!-- Группа препарата -->
-        <label for="drug_group">Drug group:</label>
-        <select id="drug_group" name="drug_group" th:field="*{drugGroup}">
-            <option value="ANALGESICS">ANALGESICS</option>
-            <option value="ANTIBIOTICS">ANTIBIOTICS</option>
-            <option value="DIURETICS">DIURETICS</option>
-            <option value="ANTISEPTICS">ANTISEPTICS</option>
-            <option value="SPASMOLYTICS">SPASMOLYTICS</option>
-        </select>
-
-        <!-- Выпадающий список для выбора лекарств -->
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                Оберіть аналоги:
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li th:each="drug : ${allDrugs}">
-                    <a th:href="@{/admin/drugs/addAnalog(drugId=${drug.id})}" class="add">
-                        <span class="dropdown-item" name="selectedDrugId" th:value="${drug.id}" th:text="${drug.name}"></span>
-                    </a>
-                </li>
-            </ul>
-            <h4>Drug List</h4>
-            <ul>
-                <li th:each="drug : ${temporaryDrugs}">
-                    <p th:text="${drug.name}"></p>
-                    <a th:href="@{/admin/drugs/removeDrug(drugId=${drug.id})}" class="remove-icon">X</a>
-                </li>
-            </ul>
+    <div>
+        <div class="d-flex justify-content-center">
+            <h2 style="padding-top: 40px">Створення препарату</h2>
         </div>
-
-        <!-- Выпадающий список для выбора хвороб -->
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
-                Додати до хвороби:
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li th:each="disease : ${allDiseases}">
-                    <a th:href="@{/admin/drugs/addDisease(diseaseId=${disease.id})}" class="add">
-                        <span class="dropdown-item" name="selectedDiseaseId" th:value="${disease.id}" th:text="${disease.name}"></span>
-                    </a>
-                </li>
-            </ul>
-            <h4>Drug List</h4>
-            <ul>
-                <li th:each="disease : ${temporaryDiseases}">
-                    <p th:text="${disease.name}"></p>
-                    <a th:href="@{/admin/drugs/removeDisease(diseaseId=${disease.id})}" class="remove-icon">X</a>
-                </li>
-            </ul>
-        </div>
-
-        <button type="button" onclick="submitForm()">Создать препарат</button>
-    </form>
+        &nbsp;
+        <form class="row gx-3 gy-3 align-items-center" th:action="@{/admin/drugs/create}" method="post"
+              th:object="${drug}">
+            <div class="row">
+                <div class="col-sm-4">
+                    <label for="name">Назва препарату: </label>
+                    <input type="text" id="name" class="form-control" placeholder="name" aria-label="name"
+                           th:field="*{name}" required>
+                </div>
+                <div class="col-sm-4">
+                    <label for="name">Опис властивостей: </label>
+                    <input type="text" id="description" class="form-control" placeholder="description"
+                           aria-label="description"
+                           th:field="*{description}">
+                </div>
+                <div class="col-sm-4">
+                    <label for="article">Артикул: </label>
+                    <input type="text" id="article" class="form-control" placeholder="article" aria-label="article"
+                           th:field="*{article}" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <label for="doseValue">Розмір дози: </label>
+                    <input type="number" id="doseValue" step="0.01" class="form-control" placeholder="doseValue"
+                           aria-label="doseValue"
+                           th:field="*{doseValue}">
+                </div>
+                <div class="col-sm-4">
+                    <label for="name">Одиниці виміру: </label>
+                    <input type="text" id="doseUnit" class="form-control" placeholder="doseUnit" aria-label="doseUnit"
+                           th:field="*{doseUnit}">
+                </div>
+                <div class="col-sm-4">
+                    <label for="drug_group">Фармакологічна група: </label>
+                    <select class="form-select" id="drug_group" name="drug_group" th:field="*{drugGroup}">
+                        <option value="ANALGESICS">Знеболюючі</option>
+                        <option value="ANTIBIOTICS">Антибіотики</option>
+                        <option value="DIURETICS">Сечогінні</option>
+                        <option value="ANTISEPTICS">Антисептики</option>
+                        <option value="SPASMOLYTICS">Спазмолітики</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                            Оберіть аналоги:
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <li th:each="drug : ${allDrugs}">
+                                <a th:href="@{/admin/drugs/addAnalog(drugId=${drug.id})}" class="add">
+                                    <span class="dropdown-item" name="selectedDrugId" th:value="${drug.id}"
+                                          th:text="${drug.name}"></span>
+                                </a>
+                            </li>
+                        </ul>
+                        <h5>Список обраних препаратів</h5>
+                        <ul>
+                            <li th:each="drug : ${temporaryDrugs}">
+                                <p class="simple_par" th:text="${drug.name}"></p>
+                                <a th:href="@{/admin/drugs/removeDrug(drugId=${drug.id})}" class="remove-icon">X</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                            Оберіть хвороби:
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <li th:each="disease : ${allDiseases}">
+                                <a th:href="@{/admin/drugs/addDisease(diseaseId=${disease.id})}" class="add">
+                            <span class="dropdown-item" name="selectedDiseaseId" th:value="${disease.id}"
+                                  th:text="${disease.name}"></span>
+                                </a>
+                            </li>
+                        </ul>
+                        <h5>Список обраних хвороб</h5>
+                        <ul>
+                            <li th:each="disease : ${temporaryDiseases}">
+                                <p class="simple_par" th:text="${disease.name}"></p>
+                                <a th:href="@{/admin/drugs/removeDisease(diseaseId=${disease.id})}" class="remove-icon">X</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    <button class="btn btn-primary" onclick="submitForm()">Створити препарат</button>
+                </div>
+            </div>
+        </form>
+    </div>
 </div>
 <script>
     function submitForm() {
-        // Отправка формы с использованием AJAX
         $.ajax({
             type: 'POST',
             url: $('#drugForm').attr('action'),
-            data: $('#drugForm').serialize(), // Сериализация данных формы
+            data: $('#drugForm').serialize(),
             success: function (response) {
-                // Обработка успешного ответа
-                // Обновление части страницы, если необходимо
-                // Например, обновление списка аналогов или хвороб
             },
             error: function (error) {
-                // Обработка ошибки
             }
         });
     }

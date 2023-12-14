@@ -14,10 +14,10 @@
 <div layout:fragment="doctor_content">
     <div class="container text-center " style="padding-top: 10px">
         <h3 th:text="${drug.name}"></h3>
-        <p th:text="${drug.description}"></p>
-        <p th:text="${drug.article}"></p>
-        <p th:text="${drug.drugGroup}"></p>
-        <p th:text="${drug.doseValue +' '+ drug.doseUnit}"></p>
+        <p  class = "simple_par" th:text="${drug.description}"></p>
+        <p class = "simple_par" th:text="${drug.article}"></p>
+        <p class = "simple_par" th:text="${drug.drugGroup}"></p>
+        <p class = "simple_par" th:text="${drug.doseValue +' '+ drug.doseUnit}"></p>
         <div>
             <h5>Хвороби: </h5>
             <ul>

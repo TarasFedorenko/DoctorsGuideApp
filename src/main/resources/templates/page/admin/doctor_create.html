@@ -3,37 +3,45 @@
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
       layout:decorate="~{fragments/admin_layout}">
 <head>
     <meta charset="UTF-8">
-    <title>Create Doctor</title>
+    <title>Створення користувача</title>
 </head>
 <body>
 <div layout:fragment="admin_content">
-    <h2>Create User</h2>
-    <form th:action="@{/admin/doctors/create}" method="post" th:object="${doctor}">
-        <!-- Email -->
-        <label for="email">Електронна пошта:</label>
-        <input type="email" id="email" name="email" th:field="*{email}" required/>
-        <br/>
 
-        <!-- Password -->
-        <label for="password">Пароль:</label>
-        <input type="password" id="password" name="password" th:field="*{password}" required/>
-        <br/>
-
-        <!-- First Name -->
-        <label for="firstName">Ім'я:</label>
-        <input type="text" id="firstName" name="firstName" th:field="*{firstname}" required/>
-        <br/>
-
-        <!-- Last Name -->
-        <label for="lastName">Прізвище:</label>
-        <input type="text" id="lastName" name="lastName" th:field="*{lastname}" required/>
-        <br/>
-
-        <button type="submit">Створити користувача</button>
+    <h3 style="padding-top: 40px">Створити користувача</h3>
+    &nbsp;
+    <form class="row gx-3 gy-3 align-items-center" th:action="@{/admin/doctors/create}" method="post"
+          th:object="${doctor}">
+        <div class="row">
+            <div class="col-sm-3">
+                <label for="first_name">Ім'я:</label>
+                <input type="text" id="first_name" class="form-control" placeholder="Ім'я" aria-label="First name"
+                       th:field="*{firstname}">
+            </div>
+            <div class="col-sm-3">
+                <label for="last_name">Прізвище:</label>
+                <input type="text" id="last_name" class="form-control" placeholder="Прізвище" aria-label="Last name"
+                       th:field="*{lastname}">
+            </div>
+            <div class="col-sm-3">
+                <label for="email">Електронна пошта:</label>
+                <input type="email" id="email" class="form-control" placeholder="Електронна пошта"
+                       aria-label="email" th:field="*{email}">
+            </div>
+            <div class="col-sm-3">
+                <label for="password">Пароль:</label>
+                <input type="password" id="password" class="form-control" placeholder="Пароль"
+                       aria-label="password" th:field="*{password}">
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    <button type="submit" class="btn btn-primary">Зберегти</button>
+                </div>
+            </div>
+        </div>
     </form>
 </div>
 </body>
