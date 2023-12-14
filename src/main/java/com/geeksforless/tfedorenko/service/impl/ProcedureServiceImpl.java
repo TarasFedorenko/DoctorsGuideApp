@@ -27,11 +27,13 @@ public class ProcedureServiceImpl implements ProcedureService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Procedure> findAllByType(ProcedureType procedureType) {
         return procedureRepository.findAllByProcedureType(procedureType);
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<ProcedureType> findAllProcedureTypes() {
         return procedureRepository.findAllUniqueProcedureTypes();
     }

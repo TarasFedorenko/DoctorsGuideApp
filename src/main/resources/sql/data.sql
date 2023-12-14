@@ -52,3 +52,8 @@ insert into disease_drug values (1,5);
 -- users
 
 insert into users values ('ADMIN',1,'2023-12-10 18:28:17.916000','2023-12-10 18:28:17.916000','admin@mail.com', true, 'Mikola', 'Mikolenko', '$2a$10$oNvF33f6E84sfeHvHJ/ik.ULBRkOkXiuOAJyap1Wg.p9nDjpQzAsy', 1, 39, null, 'MALE');
+
+-- Drug-analog
+INSERT INTO analog_drug (drug_id, analog_id) VALUES (1, 3);
+
+INSERT INTO analog_drug (drug_id, analog_id) VALUES (3, 1);

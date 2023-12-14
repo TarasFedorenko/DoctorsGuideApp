@@ -1,7 +1,6 @@
 package com.geeksforless.tfedorenko.service.impl;
 
 import com.geeksforless.tfedorenko.persistence.entity.Disease;
-import com.geeksforless.tfedorenko.persistence.entity.Drug;
 import com.geeksforless.tfedorenko.persistence.repository.DiseaseRepository;
 import com.geeksforless.tfedorenko.service.DiseaseService;
 import lombok.RequiredArgsConstructor;

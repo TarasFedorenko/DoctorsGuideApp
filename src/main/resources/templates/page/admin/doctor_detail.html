@@ -3,49 +3,63 @@
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
       layout:decorate="~{fragments/admin_layout}">
 <head>
     <meta charset="UTF-8">
-    <title>Doctor Details</title>
+    <title>Деталі користувача</title>
 </head>
 <body>
 <div layout:fragment="admin_content">
+    <div>
+        <h3 style="padding-top: 40px">Деталі користувача</h3>
+    </div>
+    <p th:text=" '№ користувача: ' + ${doctor.id}"></p>
+    <p th:text="'Час створеня акаунту: ' + ${doctor.created}"></p>
+    <p th:text="'Чи акаунт активний : ' + ${doctor.isActive}"></p>
+    <p th:text="'Електронна пошта: ' + ${doctor.email}"></p>
+    <p th:text="'Імя користувача: ' + ${doctor.firstName}"></p>
+    <p th:text="'Прізвище користувача: ' + ${doctor.lastName}"></p>
+    <p th:text="'Вік: ' + ${doctor.age}"></p>
+    <p th:text="'Стать: ' + ${doctor.gender}"></p>
+    <p th:text="'Відділення клініки: ' + ${doctor.departmentType}"></p>
+    <h3 style="text-align: center">Призначення</h3>
+    <section class="intro">
+        <div class="mask d-flex align-items-center h-100">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-12">
+                        <div class="card bg-dark shadow-2-strong">
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-dark table-borderless mb-0">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col">№ замовлення</th>
+                                            <th scope="col">Дата створення</th>
+                                            <th scope="col">Ім'я пацієнта</th>
+                                            <th scope="col">Прізвище пацієнта</th>
+                                            <th scope="col">Дата народження</th>
 
-    <!-- Отобразите все поля из DoctorDetailDto -->
-
-    <h2>Doctor Details</h2>
-    <p th:text="'ID: ' + ${doctor.id}"></p>
-    <p th:text="'Created: ' + ${doctor.created}"></p>
-    <p th:text="'Active: ' + ${doctor.isActive}"></p>
-    <p th:text="'Email: ' + ${doctor.email}"></p>
-    <p th:text="'First Name: ' + ${doctor.firstName}"></p>
-    <p th:text="'Last Name: ' + ${doctor.lastName}"></p>
-    <p th:text="'Age: ' + ${doctor.age}"></p>
-    <p th:text="'Gender: ' + ${doctor.gender}"></p>
-    <p th:text="'Department: ' + ${doctor.departmentType}"></p>
-
-    <!-- Отобразите список приемов (appointments) -->
-
-    <h3>Appointments</h3>
-    <table border="1">
-        <thead>
-        <tr>
-            <th>Appointment ID</th>
-            <th>Date</th>
-            <!-- Добавьте другие заголовки, если необходимо -->
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="appointment : ${doctor.appointments}">
-            <td th:text="${appointment.id}"></td>
-            <td th:text="${appointment.created}"></td>
-            <td th:text="${appointment.firstName + ' ' + appointment.lastName}"></td>
-            <td th:text="${appointment.birthDate}"></td>
-        </tr>
-        </tbody>
-    </table>
-
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="appointment : ${doctor.appointments}">
+                                            <td th:text="${appointment.id}"></td>
+                                            <td th:text="${appointment.created}"></td>
+                                            <td th:text="${appointment.firstName}"></td>
+                                            <td th:text="${appointment.lastName}"></td>
+                                            <td th:text="${#dates.format(appointment.birthDate, 'dd-MM-yyyy')}"></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 </div>
 </body>
 </html>
