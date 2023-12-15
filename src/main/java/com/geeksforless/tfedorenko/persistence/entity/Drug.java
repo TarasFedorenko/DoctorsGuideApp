@@ -1,7 +1,6 @@
 package com.geeksforless.tfedorenko.persistence.entity;
 
 import com.geeksforless.tfedorenko.persistence.type.DrugGroup;
-import groovy.transform.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 

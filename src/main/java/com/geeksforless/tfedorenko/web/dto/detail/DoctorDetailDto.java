@@ -24,7 +24,7 @@ public class DoctorDetailDto extends DoctorDto {
     private DepartmentType departmentType;
     private List<AppointmentDto> appointments;
 
-    public DoctorDetailDto(Doctor doctor){
+    public DoctorDetailDto(Doctor doctor) {
         super(doctor);
         this.age = doctor.getAge();
         this.gender = doctor.getGender();
@@ -34,8 +34,8 @@ public class DoctorDetailDto extends DoctorDto {
 
     private void initAppointment(Doctor doctor) {
         List<Appointment> doctorSet = doctor.getAppointments();
-        if(CollectionUtils.isNotEmpty(doctorSet)){
-            this.appointments= doctorSet.stream().map(AppointmentDto::new).collect(Collectors.toList());
+        if (CollectionUtils.isNotEmpty(doctorSet)) {
+            this.appointments = doctorSet.stream().map(AppointmentDto::new).collect(Collectors.toList());
         }
     }
 }

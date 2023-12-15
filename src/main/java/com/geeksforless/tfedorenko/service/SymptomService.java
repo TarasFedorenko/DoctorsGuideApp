@@ -1,6 +1,5 @@
 package com.geeksforless.tfedorenko.service;
 
-import com.geeksforless.tfedorenko.persistence.entity.Disease;
 import com.geeksforless.tfedorenko.persistence.entity.Symptom;
 import com.geeksforless.tfedorenko.persistence.type.SymptomType;
 
@@ -12,6 +11,5 @@ public interface SymptomService {
     List<Symptom> findAll();
     List<Symptom> findAllByType(SymptomType symptomType);
     List<SymptomType> findAllSymptomTypes();
-
 
 }

@@ -3,7 +3,6 @@
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
       layout:decorate="~{fragments/admin_layout}">
 <head>
     <meta charset="UTF-8">
@@ -24,18 +23,18 @@
                 <div class="col-sm-4">
                     <label for="name">Назва препарату: </label>
                     <input type="text" id="name" class="form-control" placeholder="name" aria-label="name"
-                           th:field="*{name}" required>
+                           th:field="*{name}" required="required">
                 </div>
                 <div class="col-sm-4">
                     <label for="name">Опис властивостей: </label>
                     <input type="text" id="description" class="form-control" placeholder="description"
                            aria-label="description"
-                           th:field="*{description}">
+                           th:field="*{description}" required="required">
                 </div>
                 <div class="col-sm-4">
                     <label for="article">Артикул: </label>
                     <input type="text" id="article" class="form-control" placeholder="article" aria-label="article"
-                           th:field="*{article}" required>
+                           th:field="*{article}" required="required">
                 </div>
             </div>
             <div class="row">
@@ -43,16 +42,17 @@
                     <label for="doseValue">Розмір дози: </label>
                     <input type="number" id="doseValue" step="0.01" class="form-control" placeholder="doseValue"
                            aria-label="doseValue"
-                           th:field="*{doseValue}">
+                           th:field="*{doseValue}" required="required">
                 </div>
                 <div class="col-sm-4">
                     <label for="name">Одиниці виміру: </label>
                     <input type="text" id="doseUnit" class="form-control" placeholder="doseUnit" aria-label="doseUnit"
-                           th:field="*{doseUnit}">
+                           th:field="*{doseUnit}" required="required">
                 </div>
                 <div class="col-sm-4">
                     <label for="drug_group">Фармакологічна група: </label>
-                    <select class="form-select" id="drug_group" name="drug_group" th:field="*{drugGroup}">
+                    <select class="form-select" id="drug_group" name="drug_group" th:field="*{drugGroup}"
+                            required="required">
                         <option value="ANALGESICS">Знеболюючі</option>
                         <option value="ANTIBIOTICS">Антибіотики</option>
                         <option value="DIURETICS">Сечогінні</option>

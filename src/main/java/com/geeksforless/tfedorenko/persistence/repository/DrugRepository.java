@@ -1,6 +1,5 @@
 package com.geeksforless.tfedorenko.persistence.repository;
 
-import com.geeksforless.tfedorenko.persistence.entity.Disease;
 import com.geeksforless.tfedorenko.persistence.entity.Drug;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

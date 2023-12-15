@@ -1,9 +1,7 @@
 package com.geeksforless.tfedorenko.persistence.entity;
 
 import com.geeksforless.tfedorenko.persistence.type.SymptomType;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;

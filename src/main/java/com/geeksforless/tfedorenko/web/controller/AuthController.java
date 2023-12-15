@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 @RequiredArgsConstructor
-public class AuthController extends AbstractController{
+public class AuthController extends AbstractController {
 
     private final SecurityService securityService;
     private final RegistrationService registrationService;
@@ -48,19 +48,19 @@ public class AuthController extends AbstractController{
         if (securityService.isAuthenticated()) {
             return redirectToPageRole(model);
         }
-        model.addAttribute("authForm",new AuthDto());
+        model.addAttribute("authForm", new AuthDto());
         return "/registration";
     }
 
     @PostMapping("/registration")
-    public String registration(@ModelAttribute("authForm") AuthDto authDto, BindingResult bindingResult, Model model){
+    public String registration(@ModelAttribute("authForm") AuthDto authDto, BindingResult bindingResult, Model model) {
         showMessage(model, false);
-        authValidatorFacade.validate(authDto,bindingResult);
+        authValidatorFacade.validate(authDto, bindingResult);
         if (bindingResult.hasErrors()) {
             return "registration";
         }
         registrationService.registration(authDto);
-        securityService.autoLogin(authDto.getEmail(),authDto.getPassword());
+        securityService.autoLogin(authDto.getEmail(), authDto.getPassword());
         return redirectToPageRole(model);
     }
 

@@ -14,28 +14,31 @@
 <body>
 <div layout:fragment="doctor_content">
     <div class="container text-center" style="padding-top: 10px">
-            <h3 th:text ="${disease.getName()}" > </h3>
-            <p th:text ="${disease.getDiseaseClass()}"></p>
-            <div>
-                <h5>Симптоми: </h5>
-                <ul >
-                    <li th:each="symptom:${disease.getSymptoms()}">
-                        <a class="sml-box" th:href="@{/doctor/symptoms/{id}(id = ${symptom.id})}" th:text="${symptom.getName()}"></a>
-                    </li>
-                </ul>
-                <h5>Рекомендовані процедури: </h5>
-                <ul >
-                    <li th:each="procedure:${disease.getProcedures()}">
-                        <a class="sml-box" th:href="@{/doctor/procedures/{id}(id = ${procedure.id})}" th:text="${procedure.getName()}"></a>
-                    </li>
-                </ul>
-                <h5>Рекомендовані препарати: </h5>
-                <ul >
-                    <li th:each="drug:${disease.getDrugs()}">
-                        <a class="sml-box" th:href="@{/doctor/drugs/{id}(id = ${drug.getId()})}" th:text="${drug.getName()}"></a>
-                    </li>
-                </ul>
-            </div>
+        <h3 th:text="${disease.getName()}"></h3>
+        <p class="simple_par" th:text="${disease.getDiseaseClass()}"></p>
+        <div>
+            <h5>Симптоми: </h5>
+            <ul>
+                <li th:each="symptom:${disease.getSymptoms()}">
+                    <a class="sml-box" th:href="@{/doctor/symptoms/{id}(id = ${symptom.id})}"
+                       th:text="${symptom.getName()}"></a>
+                </li>
+            </ul>
+            <h5>Рекомендовані процедури: </h5>
+            <ul>
+                <li th:each="procedure:${disease.getProcedures()}">
+                    <a class="sml-box" th:href="@{/doctor/procedures/{id}(id = ${procedure.id})}"
+                       th:text="${procedure.getName()}"></a>
+                </li>
+            </ul>
+            <h5>Рекомендовані препарати: </h5>
+            <ul>
+                <li th:each="drug:${disease.getDrugs()}">
+                    <a class="sml-box" th:href="@{/doctor/drugs/{id}(id = ${drug.getId()})}"
+                       th:text="${drug.getName()}"></a>
+                </li>
+            </ul>
+        </div>
     </div>
 </div>
 </body>

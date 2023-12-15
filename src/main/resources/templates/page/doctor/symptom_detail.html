@@ -14,7 +14,7 @@
 <div layout:fragment="doctor_content">
     <div class="container text-center">
         <h2 th:text="${symptom.getName()}"></h2>
-        <p th:text="${symptom.getSymptomType()}"></p>
+        <h4 th:text="${symptom.getSymptomType()}"></h4>
         <h5>Симптомы:</h5>
         <ul>
             <li th:each="disease:${symptom.getDiseases()}">

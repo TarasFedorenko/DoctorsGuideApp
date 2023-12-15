@@ -21,17 +21,18 @@
                 <div class="col-4 ">
                     <label for="first_name">First Name: </label>
                     <input type="text" id="first_name" class="form-control" placeholder="Ім'я" aria-label="First name"
-                           th:field="*{firstName}" >
+                           th:field="*{firstName}" required="required"/>
                 </div>
                 <div class="col-4">
                     <label for="last_name">Last Name:</label>
                     <input type="text" id="last_name" class="form-control" placeholder="Прізвище" aria-label="Last name"
-                           th:field="*{lastName}" />
+                           th:field="*{lastName}" required="required"/>
                 </div>
                 <div class="col-4">
                     <label for="date_of_birth">Date of Birth:</label>
                     <input type="date" id="date_of_birth" class="form-control" placeholder="Дата народження"
-                           aria-label="Date of birth" th:field="*{birthDate}" />
+                           aria-label="Date of birth" th:field="*{birthDate}" required="required"
+                           min="1900-01-01" max="2023-12-01"/>
                 </div>
             </div>
             <h5>Список призначених препаратів</h5>
@@ -39,7 +40,7 @@
                 <li th:each="drug : ${temporaryDrugs}">
                     <p th:text="${drug.name}"></p>
                     <label>Кількість: <input type="number" th:field="*{drugQuantities[__${drug.id}__]}" min="1"
-                                            value="1"/></label>
+                                             value="1" required="required"/></label>
                     <a th:href="@{/doctor/appointment/removeDrug(drugId=${drug.id})}" class="remove-icon">X</a>
                 </li>
             </ul>

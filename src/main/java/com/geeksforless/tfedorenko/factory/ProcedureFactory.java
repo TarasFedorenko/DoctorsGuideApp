@@ -1,9 +1,8 @@
 package com.geeksforless.tfedorenko.factory;
 
 import com.geeksforless.tfedorenko.persistence.entity.Procedure;
-import com.geeksforless.tfedorenko.persistence.entity.Symptom;
 import com.geeksforless.tfedorenko.persistence.type.ProcedureType;
-import com.geeksforless.tfedorenko.persistence.type.SymptomType;
+
 
 public class ProcedureFactory {
     public static Procedure createTwoArgsProcedure(Long id, String name) {

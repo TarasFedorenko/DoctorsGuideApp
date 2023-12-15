@@ -14,7 +14,7 @@ public class DiseaseDto {
     private String name;
     private DiseaseClass diseaseClass;
 
-    public DiseaseDto(Disease disease){
+    public DiseaseDto(Disease disease) {
         this.id = disease.getId();
         this.name = disease.getName();
         this.diseaseClass = disease.getDiseaseClass();

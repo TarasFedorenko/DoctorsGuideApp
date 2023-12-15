@@ -22,7 +22,8 @@
             </form>
             <ul>
                 <li th:each="letter : ${alphabet}">
-                    <a class="letter" th:href="@{/doctor/drugs/letter/{letter}(letter=${letter})}" th:text="${letter}"></a>
+                    <a class="letter" th:href="@{/doctor/drugs/letter/{letter}(letter=${letter})}"
+                       th:text="${letter}"></a>
                 </li>
             </ul>
         </div>

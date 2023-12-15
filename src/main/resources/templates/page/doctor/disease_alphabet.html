@@ -15,7 +15,8 @@
     <h3 style="padding-top: 10px">Хвороби що починаються з <span th:text="${#strings.toUpperCase(letter)}"></span></h3>
     <ul>
         <li th:each="disease : ${diseases}">
-            <a class="mid-box" th:href="@{/doctor/diseases/{id}(id=${disease.getId()})}" th:text="${disease.getName()}"></a>
+            <a class="mid-box" th:href="@{/doctor/diseases/{id}(id=${disease.getId()})}"
+               th:text="${disease.getName()}"></a>
         </li>
     </ul>
 </div>

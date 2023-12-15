@@ -19,12 +19,12 @@ public class DrugDto {
     private DrugGroup drugGroup;
     private Integer quantity;
 
-    public DrugDto(Drug drug){
-        this.id= drug.getId();
+    public DrugDto(Drug drug) {
+        this.id = drug.getId();
         this.name = drug.getName();
         this.article = drug.getArticle();
-        this.drugGroup =drug.getDrugGroup();
+        this.drugGroup = drug.getDrugGroup();
         this.quantity = drug.getQuantity();
-        this.created =drug.getCreated();
+        this.created = drug.getCreated();
     }
 }

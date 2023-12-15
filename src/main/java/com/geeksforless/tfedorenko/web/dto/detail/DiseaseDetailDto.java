@@ -26,7 +26,7 @@ public class DiseaseDetailDto extends DiseaseDto {
     private Set<ProcedureDto> procedures;
     private Set<DrugDto> drugs;
 
-    public DiseaseDetailDto(Disease disease){
+    public DiseaseDetailDto(Disease disease) {
         super(disease);
         initSymptoms(disease);
         initProcedures(disease);
@@ -35,22 +35,22 @@ public class DiseaseDetailDto extends DiseaseDto {
 
     private void initDrugs(Disease disease) {
         Set<Drug> drugSet = disease.getDrugs();
-        if(CollectionUtils.isNotEmpty(drugSet)){
+        if (CollectionUtils.isNotEmpty(drugSet)) {
             this.drugs = drugSet.stream().map(DrugDto::new).collect(Collectors.toSet());
         }
     }
 
     private void initProcedures(Disease disease) {
-        Set<Procedure> procedureSet =disease.getProcedures();
-        if(CollectionUtils.isNotEmpty(procedureSet)){
+        Set<Procedure> procedureSet = disease.getProcedures();
+        if (CollectionUtils.isNotEmpty(procedureSet)) {
             this.procedures = procedureSet.stream().map(ProcedureDto::new).collect(Collectors.toSet());
         }
     }
 
     private void initSymptoms(Disease disease) {
         Set<Symptom> symptomSet = disease.getSymptoms();
-        if(CollectionUtils.isNotEmpty(symptomSet)){
-            this.symptoms=symptomSet.stream().map(SymptomDto::new).collect(Collectors.toSet());
+        if (CollectionUtils.isNotEmpty(symptomSet)) {
+            this.symptoms = symptomSet.stream().map(SymptomDto::new).collect(Collectors.toSet());
         }
     }
 }

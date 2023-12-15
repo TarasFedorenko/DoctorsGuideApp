@@ -12,13 +12,15 @@
 </head>
 <body>
 <div layout:fragment="doctor_content">
-    <h2>Симптоми типу: <span th:text="${#strings.toUpperCase(type)}"></span></h2>
-    <ul>
-        <li th:each="symptom : ${symptoms}">
-            <a class="mid-box" th:href="@{/doctor/symptoms/{id}(id=${symptom.getId()})}" th:text="${symptom.getName()}"></a>
-        </li>
-    </ul>
-
+    <div class="container center">
+        <h2>Симптоми типу: <span th:text="${#strings.toUpperCase(type)}"></span></h2>
+        <ul>
+            <li th:each="symptom : ${symptoms}">
+                <a class="mid-box" th:href="@{/doctor/symptoms/{id}(id=${symptom.getId()})}"
+                   th:text="${symptom.getName()}"></a>
+            </li>
+        </ul>
+    </div>
 </div>
 </body>
 </html>

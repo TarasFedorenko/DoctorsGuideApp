@@ -61,8 +61,8 @@
                     </select>
                 </div>
             </div>
-            <div class="row" >
-                <div class="col-sm-3" >
+            <div class="row">
+                <div class="col-sm-3">
                     <button type="submit" class="btn btn-primary">Зберегти</button>
                 </div>
             </div>
@@ -94,7 +94,8 @@
                                                 <td th:text="${appointment.lastName}"></td>
                                                 <td th:text="${#dates.format(appointment.birthDate, 'dd-MM-yyyy')}"></td>
                                                 <td>
-                                                    <span th:each="drug : ${appointment.drugs}" th:text="${drug.name + ' '}"></span>
+                                                    <span th:each="drug : ${appointment.drugs}"
+                                                          th:text="${drug.name + ' '}"></span>
                                                 </td>
                                             </tr>
                                             </tbody>

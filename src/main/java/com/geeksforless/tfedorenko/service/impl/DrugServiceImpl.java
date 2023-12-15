@@ -14,9 +14,10 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class DrugServiceImpl implements DrugService{
+public class DrugServiceImpl implements DrugService {
 
     private final DrugRepository drugRepository;
+
     @Override
     @Transactional(readOnly = true)
     public Optional<Drug> findById(Long id) {
@@ -34,6 +35,7 @@ public class DrugServiceImpl implements DrugService{
     public List<Drug> getDrugByFirstLetter(String letter) {
         return drugRepository.findByNameStartingWithIgnoreCase(letter);
     }
+
     @Override
     @Transactional(readOnly = true)
     public Optional<Drug> findByName(String name) {
@@ -47,7 +49,7 @@ public class DrugServiceImpl implements DrugService{
     }
 
     @Override
-    @Transactional(propagation = Propagation.REQUIRES_NEW, isolation = Isolation.REPEATABLE_READ, rollbackFor = Exception.class)
+    @Transactional(propagation = Propagation.REQUIRES_NEW, isolation = Isolation.REPEATABLE_READ)
     public void saveDrug(Drug drug) {
         drugRepository.save(drug);
     }
@@ -63,6 +65,5 @@ public class DrugServiceImpl implements DrugService{
     public void removeDrug(Long id) {
         Drug drug = drugRepository.findById(id).orElseThrow(() -> new RuntimeException("drug not found"));
         drugRepository.delete(drug);
-
     }
 }

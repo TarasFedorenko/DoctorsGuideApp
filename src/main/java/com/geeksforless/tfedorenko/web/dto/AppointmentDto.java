@@ -28,7 +28,7 @@ public class AppointmentDto {
 
     private Set<DrugDto> drugs;
 
-    public AppointmentDto(Appointment appointment){
+    public AppointmentDto(Appointment appointment) {
         this.id = appointment.getId();
         this.created = appointment.getCreated();
         this.birthDate = appointment.getBirthDate();
@@ -39,7 +39,7 @@ public class AppointmentDto {
 
     private void initDrugs(Appointment appointment) {
         Set<Drug> drugSet = appointment.getDrugs();
-        if(CollectionUtils.isNotEmpty(drugSet)){
+        if (CollectionUtils.isNotEmpty(drugSet)) {
             this.drugs = drugSet.stream().map(DrugDto::new).collect(Collectors.toSet());
         }
     }

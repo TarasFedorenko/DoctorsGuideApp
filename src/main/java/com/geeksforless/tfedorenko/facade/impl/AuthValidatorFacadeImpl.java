@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 
-
 @Service
 @RequiredArgsConstructor
 public class AuthValidatorFacadeImpl implements AuthValidatorFacade {

@@ -5,8 +5,8 @@
       xmlns:th="http://www.thymeleaf.org"
       layout:decorate="~{layout}">
 <head>
-  <meta charset="UTF-8">
-  <title>Registration</title>
+    <meta charset="UTF-8">
+    <title>Registration</title>
 </head>
 <body>
 <div layout:fragment="main_content">
@@ -22,7 +22,8 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-user"></i></span>
                             </div>
-                            <input type="text" th:field="*{email}" class="form-control" placeholder="Email" autofocus="true">
+                            <input type="text" th:field="*{email}" class="form-control" placeholder="Email"
+                                   autofocus="true">
                             <span class="has-error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
                         </div>
                         <div class="input-group form-group">
@@ -30,7 +31,8 @@
                                 <span class="input-group-text"><i class="fas fa-key"></i></span>
                             </div>
                             <input type="password" th:field="*{password}" class="form-control" placeholder="Password">
-                            <span class="has-error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+                            <span class="has-error" th:if="${#fields.hasErrors('password')}"
+                                  th:errors="*{password}"></span>
                         </div>
                         <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
                     </form>

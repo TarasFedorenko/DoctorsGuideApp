@@ -28,7 +28,7 @@ html,body {
 
 .input-group-prepend span {
     width: 50px;
-    background-color: #FFC312;
+    background-color: #448da2;
     color: black;
     border:0 !important;
 }
@@ -39,7 +39,7 @@ input:focus {
 
 .login_btn {
     color: black;
-    background-color: #FFC312;
+    background-color: #448da2;
     width: 100px;
 }
 
@@ -131,7 +131,25 @@ footer {
 }
 .simple_par{
     letter-spacing: 2px;
+    text-align: center;
     line-height: 20px;
     text-indent: 15px;
     text-transform: uppercase;
+}
+.availability {
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px;
+}
+
+.available {
+    color: green;
+}
+
+.limited {
+    color: orange;
+}
+
+.out-of-stock {
+    color: red;
 }

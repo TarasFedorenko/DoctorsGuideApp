@@ -12,21 +12,22 @@
 </head>
 <body>
 <div layout:fragment="doctor_content">
-<div>
-    <div class="container">
-        <h2 class="center" >Хвороби</h2>
-        <form th:action="@{/doctor/diseases/search}" method="get">
-            <label for="search">Пошук по хворобі:</label>
-            <input type="text" id="search" name="name" placeholder="Введіть назву хвороби">
-            <button type="submit">Шукати</button>
-        </form>
-        <ul>
-            <li th:each="letter : ${alphabet}">
-                <a class="letter" th:href="@{/doctor/diseases/letter/{letter}(letter=${letter})}" th:text="${letter}"></a>
-            </li>
-        </ul>
+    <div>
+        <div class="container">
+            <h2 class="center">Хвороби</h2>
+            <form th:action="@{/doctor/diseases/search}" method="get">
+                <label for="search">Пошук по хворобі:</label>
+                <input type="text" id="search" name="name" placeholder="Введіть назву хвороби">
+                <button type="submit">Шукати</button>
+            </form>
+            <ul>
+                <li th:each="letter : ${alphabet}">
+                    <a class="letter" th:href="@{/doctor/diseases/letter/{letter}(letter=${letter})}"
+                       th:text="${letter}"></a>
+                </li>
+            </ul>
+        </div>
     </div>
-</div>
 </div>
 </body>
 </html>

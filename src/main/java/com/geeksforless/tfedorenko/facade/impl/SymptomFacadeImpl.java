@@ -9,7 +9,6 @@ import com.geeksforless.tfedorenko.web.dto.detail.SymptomDetailDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -19,6 +18,7 @@ import java.util.stream.Collectors;
 public class SymptomFacadeImpl implements SymptomFacade {
 
     private final SymptomService symptomService;
+
     @Override
     public List<SymptomDto> findAllByType(String typesName) {
         List<Symptom> symptoms = symptomService.findAllByType(SymptomType.valueOf(typesName));
@@ -35,6 +35,6 @@ public class SymptomFacadeImpl implements SymptomFacade {
     @Override
     public SymptomDetailDto findById(Long id) {
         Optional<Symptom> symptomOptional = symptomService.findById(id);
-        return symptomOptional.map(SymptomDetailDto::new).orElseThrow(()-> new RuntimeException("Symptom not found"));
+        return symptomOptional.map(SymptomDetailDto::new).orElseThrow(() -> new RuntimeException("Symptom not found"));
     }
 }

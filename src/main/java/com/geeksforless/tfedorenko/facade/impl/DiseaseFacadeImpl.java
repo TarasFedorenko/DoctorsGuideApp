@@ -16,7 +16,8 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class DiseaseFacadeImpl implements DiseaseFacade {
 
-    private  final DiseaseService diseaseService;
+    private final DiseaseService diseaseService;
+
     @Override
     public List<DiseaseDto> findAll() {
         List<Disease> diseaseList = diseaseService.findAll();
@@ -26,7 +27,7 @@ public class DiseaseFacadeImpl implements DiseaseFacade {
     @Override
     public DiseaseDetailDto findById(Long id) {
         Optional<Disease> diseaseOptional = diseaseService.findById(id);
-        return diseaseOptional.map(DiseaseDetailDto::new).orElseThrow(()-> new RuntimeException("Disease not found"));
+        return diseaseOptional.map(DiseaseDetailDto::new).orElseThrow(() -> new RuntimeException("Disease not found"));
     }
 
     @Override
@@ -37,14 +38,8 @@ public class DiseaseFacadeImpl implements DiseaseFacade {
 
     @Override
     public DiseaseDetailDto findByName(String name) {
-            return diseaseService.findByName(name)
-                    .map(DiseaseDetailDto::new)
-                    .orElseThrow(() -> new RuntimeException("Disease not found"));
+        return diseaseService.findByName(name)
+                .map(DiseaseDetailDto::new)
+                .orElse(null);
     }
-
-    @Override
-    public List<Disease> findAllByIds(List<Long> disease) {
-        return diseaseService.findAllByIds(disease);
-    }
-
 }

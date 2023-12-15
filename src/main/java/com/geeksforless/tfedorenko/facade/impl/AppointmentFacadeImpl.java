@@ -13,8 +13,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -32,9 +30,6 @@ public class AppointmentFacadeImpl implements AppointmentFacade {
     private final AppointmentService appointmentService;
 
     private final DoctorService doctorService;
-
-    @PersistenceContext
-    private EntityManager entityManager;
 
     private final Set<Drug> temporaryDrugs = new HashSet<>();
 
@@ -56,6 +51,7 @@ public class AppointmentFacadeImpl implements AppointmentFacade {
             throw new RuntimeException("Drug not found");
         }
     }
+
     @Override
     @Transactional
     public void saveAppointment(Appointment newAppointment) {
@@ -107,6 +103,7 @@ public class AppointmentFacadeImpl implements AppointmentFacade {
                 .map(Drug::getId)
                 .collect(Collectors.toList());
     }
+
     public void saveAppointmentToFile(Appointment appointment) {
         try {
             Path directoryPath = Paths.get(DIRECTORY_PATH);
